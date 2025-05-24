@@ -4,6 +4,7 @@ import { ViewTransitions } from "next-view-transitions";
 import "./globals.css";
 
 import Dock from "@/components/ui/dock";
+import CustomCursor from "@/components/ui/custom-cursor";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -26,15 +27,16 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <ViewTransitions>
-            <html lang="en">
-                <body
-                    className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-                >
+        <html lang="en">
+            <body
+                className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+            >
+                <CustomCursor />
+                <ViewTransitions>
                     {children}
                     <Dock />
-                </body>
-            </html>
-        </ViewTransitions>
+                </ViewTransitions>
+            </body>
+        </html>
     );
 }
