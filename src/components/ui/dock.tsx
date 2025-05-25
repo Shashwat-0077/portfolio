@@ -13,7 +13,7 @@ const Dock = () => {
             className="fixed left-1/2 top-6 z-50 -translate-x-1/2 transform"
         >
             <TooltipProvider>
-                <div className="shadow-deep flex items-center gap-2 rounded-full border-2 border-[#737373] bg-[#3C3C3C] px-10">
+                <div className="flex items-center gap-2 rounded-full border-2 border-[#737373] bg-[#3C3C3C] px-10 shadow-deep">
                     <TransitionLink
                         href="/"
                         className="flex h-12 w-12 items-center justify-center transition-all duration-300 hover:scale-125"
