@@ -1,11 +1,8 @@
-export default function About() {
+export default function AboutPage() {
     return (
-        <div className="flex min-h-screen flex-col items-center justify-center text-center text-white">
-            <h1 className="mb-4 text-3xl font-bold">About Us</h1>
-            <p>
-                We are passionate developers building cool stuff with React and
-                Tailwind.
-            </p>
+        <div className="flex min-h-screen flex-col items-center justify-center bg-gray-900 text-white">
+            <h1 className="text-4xl font-bold">About</h1>
+            <p className="mt-4 text-lg">Learn more about us here.</p>
         </div>
     );
 }

@@ -39,12 +39,3 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-
-# drizzle
-drizzle/
-
-# bun lock file
-bun.lockb
-
-# vscode
-.vscode/
