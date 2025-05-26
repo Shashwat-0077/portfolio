@@ -2,68 +2,34 @@
 import { useRef } from "react";
 import { usePathname } from "next/navigation";
 import TransitionLink from "@/components/transition-link";
-import { ANIMATION_CONSTANTS, ROUTES } from "@/lib/constants";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
+import { ANIMATION_CONSTANTS, BROWSER_SUPPORT, ROUTES } from "@/lib/constants";
 import { cn } from "@/lib/utils";
+import { animateDockIn } from "@/lib/dock-animations";
+import { usePreloaderStore } from "@/store/preloader-store";
+import { useGSAP } from "@gsap/react";
 
 const Dock = () => {
     // const { isLoading } = usePreloaderStore();
     const dockRef = useRef<HTMLDivElement>(null);
+    const { isLoading } = usePreloaderStore();
 
     const pathname = usePathname();
 
-    useGSAP(
-        () => {
-            const tl = gsap.timeline();
-
-            const inactiveLink = Array.from(
-                dockRef.current?.querySelectorAll(`.dock-link.inactive`) || []
-            ) as HTMLElement[];
-
-            // Initial state
-            gsap.set(dockRef.current, {
-                opacity: 0.5,
-                padding: 0,
-                y: 10,
-                boxShadow: "0 0 0 rgba(0, 0, 0, 0)",
-            });
-
-            gsap.set(inactiveLink, {
-                width: 0,
-            });
-
-            // Animation sequence
-            tl
-                // Show dock first
-                .to(dockRef.current, {
-                    opacity: 1,
-                    y: 0,
-                    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-                    duration: 0.3,
-                    ease: "power2.out",
-                    delay: 1.5,
-                })
-                .to(dockRef.current, {
-                    padding: "0 1.75rem",
-                    duration: 0.3,
-                    ease: "power2.inOut",
-                })
-                .to(
-                    inactiveLink,
-                    {
-                        width: "3rem",
-                        duration: 0.5,
-                        delay: 0.2,
-                        ease: "back.out(1.7)",
-                    },
-                    "<"
-                );
-        },
-        {
-            scope: dockRef,
+    useGSAP(() => {
+        if (
+            !dockRef.current ||
+            isLoading ||
+            !BROWSER_SUPPORT.hasViewTransitions()
+        ) {
+            return;
         }
-    );
+
+        const inactiveLinks = Array.from(
+            dockRef.current?.querySelectorAll(`.dock-link.inactive`) || []
+        ) as HTMLElement[];
+
+        animateDockIn(dockRef.current, inactiveLinks);
+    }, [isLoading, dockRef.current]);
 
     return (
         <div

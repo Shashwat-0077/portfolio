@@ -59,4 +59,4 @@ export const ROUTES = [
         label: "Contact",
     },
 ];
-export const ROUTES_TO_PREFETCH = ["/", "/about", "/contact"] as const;
+export const ROUTES_TO_PREFETCH = ROUTES.map(({ path }) => path);

@@ -2,9 +2,9 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import type React from "react";
-import { useAnimationStore } from "@/lib/animation-store";
+import { useAnimationStore } from "@/store/animation-store";
 import { BROWSER_SUPPORT } from "@/lib/constants";
-import gsap from "gsap";
+import { animateDockOut } from "@/lib/dock-animations";
 
 const TransitionLink = ({
     children,
@@ -36,41 +36,6 @@ const TransitionLink = ({
         });
     };
 
-    const fadeOutDock = (dock: HTMLElement): Promise<void> => {
-        dock.style.pointerEvents = "none";
-
-        return new Promise((resolve) => {
-            const inactiveLink = Array.from(
-                dock.querySelectorAll(`.dock-link.inactive`)
-            ) as HTMLElement[];
-
-            const tl = gsap.timeline();
-
-            tl.to(inactiveLink, {
-                width: 0,
-                duration: 0.3,
-                ease: "power2.out",
-            })
-                .to(
-                    dock,
-                    {
-                        padding: 0,
-                        duration: 0.3,
-                        ease: "power2.inOut",
-                    },
-                    "<"
-                )
-                .to(dock, {
-                    y: 10,
-                    opacity: 0.5,
-                    boxShadow: "0 0 0 rgba(0, 0, 0, 0)",
-                    duration: 0.3,
-                    ease: "power2.inOut",
-                    onComplete: resolve,
-                });
-        });
-    };
-
     const handleNavigation = async (e: React.MouseEvent, path: string) => {
         e.preventDefault();
 
@@ -80,6 +45,9 @@ const TransitionLink = ({
         }
 
         const dock = document.querySelector("[data-dock]") as HTMLElement;
+        const inactiveLinks = Array.from(
+            dock.querySelectorAll(`.dock-link.inactive`)
+        ) as HTMLElement[];
 
         const hasViewTransitionSupport = BROWSER_SUPPORT.hasViewTransitions();
 
@@ -94,7 +62,7 @@ const TransitionLink = ({
         try {
             if (hasViewTransitionSupport && dock) {
                 // Step 1: Animate dock out
-                await fadeOutDock(dock);
+                await animateDockOut(dock, inactiveLinks);
 
                 // Step 2: Start view transition
                 const transition = document.startViewTransition(() => {

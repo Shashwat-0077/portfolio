@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect } from "react";
-import { useAnimationStore } from "@/lib/animation-store";
-import { usePreloaderStore } from "@/lib/preloader-store";
+import { useAnimationStore } from "@/store/animation-store";
+import { usePreloaderStore } from "@/store/preloader-store";
 import { ANIMATION_CONSTANTS } from "@/lib/constants";
 
 const CursorAnimation = () => {

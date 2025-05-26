@@ -1,7 +1,7 @@
 import type React from "react";
 import "./globals.css";
 import CursorAnimation from "@/components/ui/cursor-animation";
-// import Preloader from "@/components/preloader";
+import Preloader from "@/components/preloader";
 
 export default function RootLayout({
     children,
@@ -12,7 +12,7 @@ export default function RootLayout({
         <html lang="en">
             <body>
                 {/* Preloader - shows on first visit */}
-                {/* <Preloader /> */}
+                <Preloader />
 
                 {/* Navigation persists across all pages */}
                 <CursorAnimation />
