@@ -1,9 +1,10 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import type React from "react";
 import { useAnimationStore } from "@/lib/animation-store";
-import { ANIMATION_CONSTANTS, BROWSER_SUPPORT } from "@/lib/constants";
+import { BROWSER_SUPPORT } from "@/lib/constants";
+import gsap from "gsap";
 
 const TransitionLink = ({
     children,
@@ -13,7 +14,9 @@ const TransitionLink = ({
     children: React.ReactNode;
     href: string;
     className?: string;
+    active?: boolean;
 }) => {
+    const pathname = usePathname();
     const router = useRouter();
     const {
         isDockAnimating,
@@ -33,25 +36,38 @@ const TransitionLink = ({
         });
     };
 
-    const animateDockOut = (dock: HTMLElement): Promise<void> => {
+    const fadeOutDock = (dock: HTMLElement): Promise<void> => {
+        dock.style.pointerEvents = "none";
+
         return new Promise((resolve) => {
-            dock.style.transform = `translateY(${ANIMATION_CONSTANTS.DOCK_HIDE_TRANSLATE_Y}px)`;
-            dock.style.transition = `transform ${ANIMATION_CONSTANTS.DOCK_HIDE_DURATION}ms ${ANIMATION_CONSTANTS.DOCK_HIDE_EASING}`;
-            dock.style.pointerEvents = "none";
+            const inactiveLink = Array.from(
+                dock.querySelectorAll(`.dock-link.inactive`)
+            ) as HTMLElement[];
 
-            setTimeout(resolve, ANIMATION_CONSTANTS.DOCK_HIDE_DURATION);
-        });
-    };
+            const tl = gsap.timeline();
 
-    const animateDockIn = (dock: HTMLElement): Promise<void> => {
-        return new Promise((resolve) => {
-            dock.style.transform = `translateY(0)`;
-            dock.style.transition = `transform ${ANIMATION_CONSTANTS.DOCK_SHOW_DURATION}ms ${ANIMATION_CONSTANTS.DOCK_SHOW_EASING}`;
-
-            setTimeout(() => {
-                dock.style.pointerEvents = "auto";
-                resolve();
-            }, ANIMATION_CONSTANTS.DOCK_SHOW_DURATION);
+            tl.to(inactiveLink, {
+                width: 0,
+                duration: 0.3,
+                ease: "power2.out",
+            })
+                .to(
+                    dock,
+                    {
+                        padding: 0,
+                        duration: 0.3,
+                        ease: "power2.inOut",
+                    },
+                    "<"
+                )
+                .to(dock, {
+                    y: 10,
+                    opacity: 0.5,
+                    boxShadow: "0 0 0 rgba(0, 0, 0, 0)",
+                    duration: 0.3,
+                    ease: "power2.inOut",
+                    onComplete: resolve,
+                });
         });
     };
 
@@ -59,11 +75,12 @@ const TransitionLink = ({
         e.preventDefault();
 
         // Prevent new transitions if dock is already animating
-        if (isDockAnimating) {
+        if (isDockAnimating || pathname === path) {
             return;
         }
 
         const dock = document.querySelector("[data-dock]") as HTMLElement;
+
         const hasViewTransitionSupport = BROWSER_SUPPORT.hasViewTransitions();
 
         // Clear any existing cursor animations immediately
@@ -77,7 +94,7 @@ const TransitionLink = ({
         try {
             if (hasViewTransitionSupport && dock) {
                 // Step 1: Animate dock out
-                await animateDockOut(dock);
+                await fadeOutDock(dock);
 
                 // Step 2: Start view transition
                 const transition = document.startViewTransition(() => {
@@ -86,7 +103,6 @@ const TransitionLink = ({
 
                 // Step 3: When transition finishes, bring dock back
                 await transition.finished;
-                await animateDockIn(dock);
             } else {
                 // For browsers without View Transition support - no dock animation
                 router.push(path);
@@ -99,7 +115,6 @@ const TransitionLink = ({
 
             // Reset dock state on error
             if (dock && hasViewTransitionSupport) {
-                dock.style.transform = `translateY(0)`;
                 dock.style.pointerEvents = "auto";
             }
         } finally {

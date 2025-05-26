@@ -2,24 +2,29 @@
 
 import { useEffect } from "react";
 import { useAnimationStore } from "@/lib/animation-store";
+import { usePreloaderStore } from "@/lib/preloader-store";
 import { ANIMATION_CONSTANTS } from "@/lib/constants";
 
 const CursorAnimation = () => {
     const { isCursorDisabled, isDockAnimating, isTransitioning } =
         useAnimationStore();
+    const { isLoading } = usePreloaderStore();
 
     useEffect(() => {
+        // Don't initialize cursor animation during preloader
+        if (isLoading) return;
+
         // Inject keyframes into the document only once
         const styleId = "click-rays-style";
         if (!document.getElementById(styleId)) {
             const style = document.createElement("style");
             style.id = styleId;
             style.textContent = `
-                @keyframes scaleDown {
-                    0% { transform: scale(1); }
-                    100% { transform: scale(0); }
-                }
-            `;
+        @keyframes scaleDown {
+          0% { transform: scale(1); }
+          100% { transform: scale(0); }
+        }
+      `;
             document.head.appendChild(style);
         }
 
@@ -48,24 +53,24 @@ const CursorAnimation = () => {
                 const translateWrapper = document.createElement("div");
                 translateWrapper.setAttribute("data-cursor-animation", "true");
                 translateWrapper.style.cssText = `
-                    position: fixed;
-                    left: ${clickX}px;
-                    top: ${clickY}px;
-                    width: 4px;
-                    height: 10px;
-                    pointer-events: none;
-                    z-index: ${ANIMATION_CONSTANTS.CURSOR_ANIMATION_Z_INDEX};
-                    transform: rotate(${angle}deg) translateY(100%);
-                    transition: transform ${ANIMATION_CONSTANTS.CURSOR_CLEANUP_DELAY}ms ease-out;
-                `;
+          position: fixed;
+          left: ${clickX}px;
+          top: ${clickY}px;
+          width: 4px;
+          height: 10px;
+          pointer-events: none;
+          z-index: ${ANIMATION_CONSTANTS.CURSOR_ANIMATION_Z_INDEX};
+          transform: rotate(${angle}deg) translateY(100%);
+          transition: transform ${ANIMATION_CONSTANTS.CURSOR_CLEANUP_DELAY}ms ease-out;
+        `;
 
                 const scaleWrapper = document.createElement("div");
                 scaleWrapper.style.cssText = `
-                    width: 100%;
-                    height: 100%;
-                    background: white;
-                    animation: scaleDown ${ANIMATION_CONSTANTS.CURSOR_CLEANUP_DELAY}ms forwards ease-out;
-                `;
+          width: 100%;
+          height: 100%;
+          background: white;
+          animation: scaleDown ${ANIMATION_CONSTANTS.CURSOR_CLEANUP_DELAY}ms forwards ease-out;
+        `;
 
                 translateWrapper.appendChild(scaleWrapper);
                 document.body.appendChild(translateWrapper);
@@ -106,7 +111,7 @@ const CursorAnimation = () => {
             document.removeEventListener("click", handleClick);
             clearExistingAnimations();
         };
-    }, [isCursorDisabled, isDockAnimating, isTransitioning]);
+    }, [isCursorDisabled, isDockAnimating, isTransitioning, isLoading]);
 
     return null;
 };

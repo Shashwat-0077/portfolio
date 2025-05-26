@@ -1,7 +1,9 @@
+import { Hammer, Home, LayoutDashboard, Phone } from "lucide-react";
+
 // Animation timing constants
 export const ANIMATION_CONSTANTS = {
-    DOCK_HIDE_DURATION: 500, // ms
-    DOCK_SHOW_DURATION: 600, // ms
+    DOCK_HIDE_DURATION: 400, // ms
+    DOCK_SHOW_DURATION: 500, // ms
     DOCK_HIDE_DELAY: 500, // ms before starting view transition
     CURSOR_CLEANUP_DELAY: 700, // ms
 
@@ -11,14 +13,21 @@ export const ANIMATION_CONSTANTS = {
     // Z-index values
     DOCK_Z_INDEX: 9999,
     CURSOR_ANIMATION_Z_INDEX: 9999,
+    PRELOADER_Z_INDEX: 99999,
 
-    // Easing functions
-    DOCK_HIDE_EASING: "cubic-bezier(0.87, 0, 0.13, 1)",
-    DOCK_SHOW_EASING: "cubic-bezier(0.34, 1.56, 0.64, 1)",
-    PAGE_TRANSITION_EASING: "cubic-bezier(0.87, 0, 0.13, 1)",
+    // Easing functions (GSAP)
+    DOCK_HIDE_EASING: "power2.inOut",
+    DOCK_SHOW_EASING: "back.out(1.2)",
+    PAGE_TRANSITION_EASING: "power4.inOut",
 
     // Page transition timing
     PAGE_TRANSITION_DURATION: 1500, // ms
+
+    // Preloader constants - Extended for SplitText animations
+    PRELOADER_DISPLAY_DURATION: 5500, // ms - increased for enhanced animations
+    PRELOADER_SLIDE_DURATION: 1.2, // seconds for GSAP
+    PRELOADER_FADE_DURATION: 0.8, // seconds for GSAP
+    PRELOADER_PROGRESS_DURATION: 4600, // ms - how long progress animation takes
 } as const;
 
 // Browser support detection
@@ -26,3 +35,28 @@ export const BROWSER_SUPPORT = {
     hasViewTransitions: () =>
         typeof document !== "undefined" && "startViewTransition" in document,
 } as const;
+
+// Routes (order matters)
+export const ROUTES = [
+    {
+        icon: Home,
+        path: "/",
+        label: "Home",
+    },
+    {
+        icon: Hammer,
+        path: "/skills",
+        label: "Skills",
+    },
+    {
+        icon: LayoutDashboard,
+        path: "/projects",
+        label: "Projects",
+    },
+    {
+        icon: Phone,
+        path: "/contact",
+        label: "Contact",
+    },
+];
+export const ROUTES_TO_PREFETCH = ["/", "/about", "/contact"] as const;
