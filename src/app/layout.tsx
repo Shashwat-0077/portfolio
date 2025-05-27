@@ -2,6 +2,7 @@ import type React from "react";
 import "./globals.css";
 import CursorAnimation from "@/components/ui/cursor-animation";
 import Preloader from "@/components/preloader";
+import { ViewTransitions } from "next-view-transitions";
 
 export default function RootLayout({
     children,
@@ -35,18 +36,19 @@ export default function RootLayout({
     // - Use a state variable (e.g., `showContent`) to hide extra content initially.
     // - Set `showContent = true` after the transition is done.
 
+    // NOTE : i don't know why the support for view transitions provided by nextjs is not working properly, but this third-party library is working. so, no complaints here.
+
+    // NOTE : not sure though if this will work with another view-transitions HTML element, haven't tested it yet.
+
     return (
-        <html lang="en">
-            <body>
-                {/* Preloader - shows on first visit */}
-                <Preloader />
-
-                {/* Navigation persists across all pages */}
-                <CursorAnimation />
-
-                {/* Only the main content area will transition */}
-                <main className="page-content">{children}</main>
-            </body>
-        </html>
+        <ViewTransitions>
+            <html lang="en">
+                <body>
+                    <Preloader />
+                    <CursorAnimation />
+                    {children}
+                </body>
+            </html>
+        </ViewTransitions>
     );
 }

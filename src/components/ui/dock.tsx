@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 import TransitionLink from "@/components/transition-link";
 import { ANIMATION_CONSTANTS, BROWSER_SUPPORT, ROUTES } from "@/lib/constants";
 import { cn } from "@/lib/utils";
-import { animateDockIn } from "@/lib/dock-animations";
 import { usePreloaderStore } from "@/store/preloader-store";
 import { useGSAP } from "@gsap/react";
 import {
@@ -15,6 +14,7 @@ import {
     TooltipProvider,
 } from "@/components/ui/tooltip";
 import { TooltipTrigger } from "@radix-ui/react-tooltip";
+import { DockAnimations } from "@/lib/animations";
 
 const Dock = () => {
     // const { isLoading } = usePreloaderStore();
@@ -36,7 +36,7 @@ const Dock = () => {
             dockRef.current?.querySelectorAll(`.dock-link.inactive`) || []
         ) as HTMLElement[];
 
-        animateDockIn(dockRef.current, inactiveLinks);
+        DockAnimations.animateIn(dockRef.current, inactiveLinks);
     }, [isLoading, dockRef.current]);
 
     return (

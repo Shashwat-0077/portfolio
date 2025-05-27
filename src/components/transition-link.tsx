@@ -1,10 +1,11 @@
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import type React from "react";
 import { useAnimationStore } from "@/store/animation-store";
 import { BROWSER_SUPPORT } from "@/lib/constants";
-import { animateDockOut } from "@/lib/dock-animations";
+import { useTransitionRouter } from "next-view-transitions";
+import { DockAnimations, PageAnimations } from "@/lib/animations";
 
 const TransitionLink = ({
     children,
@@ -17,7 +18,8 @@ const TransitionLink = ({
     active?: boolean;
 }) => {
     const pathname = usePathname();
-    const router = useRouter();
+    const router = useTransitionRouter();
+
     const {
         isDockAnimating,
         setDockAnimating,
@@ -61,13 +63,11 @@ const TransitionLink = ({
 
         try {
             if (hasViewTransitionSupport && dock) {
-                await animateDockOut(dock, inactiveLinks);
+                await DockAnimations.animateOut(dock, inactiveLinks);
 
-                const transition = document.startViewTransition(() => {
-                    router.push(path, {});
+                router.push(path, {
+                    onTransitionReady: PageAnimations.slideInAndOut,
                 });
-
-                await transition.finished;
             } else {
                 // For browsers without View Transition support - no dock animation
                 router.push(path);

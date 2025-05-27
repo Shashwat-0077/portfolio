@@ -10,51 +10,6 @@
     font-display: swap;
 }
 
-/* Apply view-transition-name via CSS */
-.page-content {
-    view-transition-name: main-content;
-}
-
-@view-transition {
-    navigation: auto;
-}
-
-/* View transition animations */
-::view-transition-old(main-content),
-::view-transition-new(main-content) {
-    animation-fill-mode: forwards;
-}
-
-::view-transition-old(main-content) {
-    animation: fade-out 1.5s cubic-bezier(0.87, 0, 0.13, 1) forwards;
-}
-
-::view-transition-new(main-content) {
-    animation: slide-up 1.5s cubic-bezier(0.87, 0, 0.13, 1) forwards;
-}
-
-@keyframes fade-out {
-    from {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    to {
-        opacity: 0.1;
-        transform: translateY(-35%);
-    }
-}
-
-@keyframes slide-up {
-    from {
-        clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
-    }
-
-    to {
-        clip-path: polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%);
-    }
-}
-
 :root {
     --jersey-font: "Jersey10", sans-serif;
     --background: #242424;
@@ -113,10 +68,6 @@
     --font-jersey: var(--jersey-font);
 }
 
-@layer base {}
-
-
-
 
 @layer base {
 
@@ -131,54 +82,64 @@
         color: var(--foreground)
     }
 
-    input[type="number"] {
-        -webkit-appearance: textfield;
-        /* Chrome, Safari, Edge */
-        -moz-appearance: textfield;
-        /* Firefox */
-        appearance: textfield;
+}
+
+
+@layer base {
+    @view-transition {
+        navigation: auto;
     }
 
-    input[type="number"]::-webkit-inner-spin-button,
-    input[type="number"]::-webkit-outer-spin-button {
-        -webkit-appearance: none;
-        /* Chrome, Safari, Edge */
-        margin: 0;
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+        animation: none !important;
     }
 
+    ::view-transition-group(root) {
+        z-index: auto !important;
+    }
+
+    ::view-transition-image-pair(root) {
+        isolation: isolate;
+        will-change: transform, opacity, clip-path;
+        z-index: 1;
+    }
+
+    ::view-transition-old(root) {
+        z-index: 1;
+        animation: none !important;
+    }
+
+    ::view-transition-new(root) {
+        z-index: 9999;
+        animation: none !important;
+    }
+}
+
+@layer base {
+
+    /* For Webkit Browsers (Chrome, Safari, Edge) */
     ::-webkit-scrollbar {
         width: 8px;
+        /* Width of the scrollbar */
         height: 8px;
+        /* Height for horizontal scrollbar */
     }
 
     ::-webkit-scrollbar-track {
         background: var(--background);
+        /* Track color */
         border-radius: 10px;
     }
 
-    /* ::-webkit-scrollbar-thumb {
+    ::-webkit-scrollbar-thumb {
         background: var(--muted);
+        /* Scrollbar color */
         border-radius: 10px;
-    } */
+    }
 
     ::-webkit-scrollbar-thumb:hover {
         background: var(--primary);
+        /* Hover effect */
     }
-
-    /* Restore cursor pointer for interactive elements */
-    button:not(:disabled),
-    [role="button"]:not(:disabled),
-    input[type="button"]:not(:disabled),
-    input[type="submit"]:not(:disabled),
-    input[type="reset"]:not(:disabled) {
-        cursor: pointer;
-    }
-
-    /* Specifically target shadcn button components */
-    [data-slot="button"]:not(:disabled),
-    .inline-flex.items-center.justify-center:not(:disabled) {
-        cursor: pointer;
-    }
-
-
 }
