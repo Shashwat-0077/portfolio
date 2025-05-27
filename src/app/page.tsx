@@ -34,7 +34,6 @@ export default function HomePage() {
                     <Button
                         asChild
                         size="lg"
-                        variant=""
                         className="bg-primary hover:bg-primary/90 flex cursor-pointer items-center justify-center text-white"
                     >
                         <TransitionLink href="/projects">
@@ -43,6 +42,7 @@ export default function HomePage() {
                         </TransitionLink>
                     </Button>
 
+                    {/* TODO : i will change it to another link, its just here for some time */}
                     <Button
                         asChild
                         size="lg"
