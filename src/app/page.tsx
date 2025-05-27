@@ -1,13 +1,232 @@
+import TransitionLink from "@/components/transition-link";
 import { Button } from "@/components/ui/button";
 import Dock from "@/components/ui/dock";
+import { ChevronDown, ChevronRight, Download } from "lucide-react";
 
 export default function HomePage() {
     return (
-        <div className="page-container bg-background flex min-h-screen flex-col items-center justify-center text-white">
-            <Dock />
+        <>
+            <section className="bg-background relative flex min-h-screen flex-col items-center justify-center text-white">
+                <Dock />
 
-            <h1 className="page-title text-4xl font-bold">Welcome Home! 🏠</h1>
-            <Button>nfwoiergnaskinfse</Button>
-        </div>
+                <h1 className="font-jersey px-4 text-center text-[clamp(2.5rem,17vw,6rem)] leading-[0.9]">
+                    Crafting <span className="text-primary">code</span>
+                    <br />
+                    <span className="text-primary">Like</span> poetry
+                </h1>
+
+                <p className="text-muted mt-6 mb-8 text-center">
+                    I&apos;m{" "}
+                    <span className="decoration-primary underline decoration-dotted decoration-2 underline-offset-4">
+                        shashwat
+                    </span>
+                    , based in Himachal Pradesh, blending logic with creativity
+                    <br />
+                    to build taught-full{" "}
+                    <span className="decoration-primary underline decoration-dotted decoration-2 underline-offset-4">
+                        software
+                    </span>
+                </p>
+
+                <div className="flex items-center gap-4">
+                    <Button
+                        asChild
+                        size="lg"
+                        className="bg-primary hover:bg-primary/90 flex cursor-pointer items-center justify-center text-white"
+                    >
+                        <TransitionLink href="/projects">
+                            <span>See my work</span>
+                            <ChevronRight className="h-4 w-4" />
+                        </TransitionLink>
+                    </Button>
+
+                    <Button
+                        asChild
+                        size="lg"
+                        variant=""
+                        className="text-primary hover:text-primary gap-0 border-transparent bg-transparent shadow-none ring-0 hover:bg-transparent"
+                        href="/contact"
+                    >
+                        <a
+                            href="/resume.pdf"
+                            rel="noopener noreferrer"
+                            target="_blank"
+                        >
+                            <Download className="mr-2 size-7" />
+                            <span>Download CV</span>
+                        </a>
+                    </Button>
+                </div>
+
+                <div className="fixed bottom-8 flex items-center justify-center">
+                    <ChevronDown className="text-muted-foreground mt-8 size-12 animate-bounce" />
+                </div>
+            </section>
+            <div>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Doloremque, at numquam asperiores eius soluta laboriosam ab in
+                sunt officiis inventore hic deleniti dolorem aut magni
+                excepturi. Eos, iure! Odit vitae ab asperiores minus nihil
+                officiis cumque eaque incidunt eligendi eius, corporis sint
+                optio veritatis dolore eveniet saepe blanditiis reprehenderit
+                molestias aspernatur doloribus neque consequuntur debitis
+                tenetur? Sapiente velit obcaecati reiciendis tenetur, error
+                minima labore! Ab ut facilis dicta amet voluptates error aperiam
+                tenetur quibusdam maxime nesciunt porro modi ipsam, nemo
+                molestias saepe aut quaerat architecto consectetur cum velit
+                fugit inventore! Praesentium iste, voluptatem eius doloribus ab
+                magnam doloremque debitis asperiores?
+            </div>
+            <div>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Doloremque, at numquam asperiores eius soluta laboriosam ab in
+                sunt officiis inventore hic deleniti dolorem aut magni
+                excepturi. Eos, iure! Odit vitae ab asperiores minus nihil
+                officiis cumque eaque incidunt eligendi eius, corporis sint
+                optio veritatis dolore eveniet saepe blanditiis reprehenderit
+                molestias aspernatur doloribus neque consequuntur debitis
+                tenetur? Sapiente velit obcaecati reiciendis tenetur, error
+                minima labore! Ab ut facilis dicta amet voluptates error aperiam
+                tenetur quibusdam maxime nesciunt porro modi ipsam, nemo
+                molestias saepe aut quaerat architecto consectetur cum velit
+                fugit inventore! Praesentium iste, voluptatem eius doloribus ab
+                magnam doloremque debitis asperiores?
+            </div>
+            <div>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Doloremque, at numquam asperiores eius soluta laboriosam ab in
+                sunt officiis inventore hic deleniti dolorem aut magni
+                excepturi. Eos, iure! Odit vitae ab asperiores minus nihil
+                officiis cumque eaque incidunt eligendi eius, corporis sint
+                optio veritatis dolore eveniet saepe blanditiis reprehenderit
+                molestias aspernatur doloribus neque consequuntur debitis
+                tenetur? Sapiente velit obcaecati reiciendis tenetur, error
+                minima labore! Ab ut facilis dicta amet voluptates error aperiam
+                tenetur quibusdam maxime nesciunt porro modi ipsam, nemo
+                molestias saepe aut quaerat architecto consectetur cum velit
+                fugit inventore! Praesentium iste, voluptatem eius doloribus ab
+                magnam doloremque debitis asperiores?
+            </div>
+            <div>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Doloremque, at numquam asperiores eius soluta laboriosam ab in
+                sunt officiis inventore hic deleniti dolorem aut magni
+                excepturi. Eos, iure! Odit vitae ab asperiores minus nihil
+                officiis cumque eaque incidunt eligendi eius, corporis sint
+                optio veritatis dolore eveniet saepe blanditiis reprehenderit
+                molestias aspernatur doloribus neque consequuntur debitis
+                tenetur? Sapiente velit obcaecati reiciendis tenetur, error
+                minima labore! Ab ut facilis dicta amet voluptates error aperiam
+                tenetur quibusdam maxime nesciunt porro modi ipsam, nemo
+                molestias saepe aut quaerat architecto consectetur cum velit
+                fugit inventore! Praesentium iste, voluptatem eius doloribus ab
+                magnam doloremque debitis asperiores?
+            </div>
+            <div>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Doloremque, at numquam asperiores eius soluta laboriosam ab in
+                sunt officiis inventore hic deleniti dolorem aut magni
+                excepturi. Eos, iure! Odit vitae ab asperiores minus nihil
+                officiis cumque eaque incidunt eligendi eius, corporis sint
+                optio veritatis dolore eveniet saepe blanditiis reprehenderit
+                molestias aspernatur doloribus neque consequuntur debitis
+                tenetur? Sapiente velit obcaecati reiciendis tenetur, error
+                minima labore! Ab ut facilis dicta amet voluptates error aperiam
+                tenetur quibusdam maxime nesciunt porro modi ipsam, nemo
+                molestias saepe aut quaerat architecto consectetur cum velit
+                fugit inventore! Praesentium iste, voluptatem eius doloribus ab
+                magnam doloremque debitis asperiores?
+            </div>
+            <div>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Doloremque, at numquam asperiores eius soluta laboriosam ab in
+                sunt officiis inventore hic deleniti dolorem aut magni
+                excepturi. Eos, iure! Odit vitae ab asperiores minus nihil
+                officiis cumque eaque incidunt eligendi eius, corporis sint
+                optio veritatis dolore eveniet saepe blanditiis reprehenderit
+                molestias aspernatur doloribus neque consequuntur debitis
+                tenetur? Sapiente velit obcaecati reiciendis tenetur, error
+                minima labore! Ab ut facilis dicta amet voluptates error aperiam
+                tenetur quibusdam maxime nesciunt porro modi ipsam, nemo
+                molestias saepe aut quaerat architecto consectetur cum velit
+                fugit inventore! Praesentium iste, voluptatem eius doloribus ab
+                magnam doloremque debitis asperiores?
+            </div>
+            <div>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Doloremque, at numquam asperiores eius soluta laboriosam ab in
+                sunt officiis inventore hic deleniti dolorem aut magni
+                excepturi. Eos, iure! Odit vitae ab asperiores minus nihil
+                officiis cumque eaque incidunt eligendi eius, corporis sint
+                optio veritatis dolore eveniet saepe blanditiis reprehenderit
+                molestias aspernatur doloribus neque consequuntur debitis
+                tenetur? Sapiente velit obcaecati reiciendis tenetur, error
+                minima labore! Ab ut facilis dicta amet voluptates error aperiam
+                tenetur quibusdam maxime nesciunt porro modi ipsam, nemo
+                molestias saepe aut quaerat architecto consectetur cum velit
+                fugit inventore! Praesentium iste, voluptatem eius doloribus ab
+                magnam doloremque debitis asperiores?
+            </div>
+            <div>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Doloremque, at numquam asperiores eius soluta laboriosam ab in
+                sunt officiis inventore hic deleniti dolorem aut magni
+                excepturi. Eos, iure! Odit vitae ab asperiores minus nihil
+                officiis cumque eaque incidunt eligendi eius, corporis sint
+                optio veritatis dolore eveniet saepe blanditiis reprehenderit
+                molestias aspernatur doloribus neque consequuntur debitis
+                tenetur? Sapiente velit obcaecati reiciendis tenetur, error
+                minima labore! Ab ut facilis dicta amet voluptates error aperiam
+                tenetur quibusdam maxime nesciunt porro modi ipsam, nemo
+                molestias saepe aut quaerat architecto consectetur cum velit
+                fugit inventore! Praesentium iste, voluptatem eius doloribus ab
+                magnam doloremque debitis asperiores?
+            </div>
+            <div>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Doloremque, at numquam asperiores eius soluta laboriosam ab in
+                sunt officiis inventore hic deleniti dolorem aut magni
+                excepturi. Eos, iure! Odit vitae ab asperiores minus nihil
+                officiis cumque eaque incidunt eligendi eius, corporis sint
+                optio veritatis dolore eveniet saepe blanditiis reprehenderit
+                molestias aspernatur doloribus neque consequuntur debitis
+                tenetur? Sapiente velit obcaecati reiciendis tenetur, error
+                minima labore! Ab ut facilis dicta amet voluptates error aperiam
+                tenetur quibusdam maxime nesciunt porro modi ipsam, nemo
+                molestias saepe aut quaerat architecto consectetur cum velit
+                fugit inventore! Praesentium iste, voluptatem eius doloribus ab
+                magnam doloremque debitis asperiores?
+            </div>
+            <div>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Doloremque, at numquam asperiores eius soluta laboriosam ab in
+                sunt officiis inventore hic deleniti dolorem aut magni
+                excepturi. Eos, iure! Odit vitae ab asperiores minus nihil
+                officiis cumque eaque incidunt eligendi eius, corporis sint
+                optio veritatis dolore eveniet saepe blanditiis reprehenderit
+                molestias aspernatur doloribus neque consequuntur debitis
+                tenetur? Sapiente velit obcaecati reiciendis tenetur, error
+                minima labore! Ab ut facilis dicta amet voluptates error aperiam
+                tenetur quibusdam maxime nesciunt porro modi ipsam, nemo
+                molestias saepe aut quaerat architecto consectetur cum velit
+                fugit inventore! Praesentium iste, voluptatem eius doloribus ab
+                magnam doloremque debitis asperiores?
+            </div>
+            <div>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Doloremque, at numquam asperiores eius soluta laboriosam ab in
+                sunt officiis inventore hic deleniti dolorem aut magni
+                excepturi. Eos, iure! Odit vitae ab asperiores minus nihil
+                officiis cumque eaque incidunt eligendi eius, corporis sint
+                optio veritatis dolore eveniet saepe blanditiis reprehenderit
+                molestias aspernatur doloribus neque consequuntur debitis
+                tenetur? Sapiente velit obcaecati reiciendis tenetur, error
+                minima labore! Ab ut facilis dicta amet voluptates error aperiam
+                tenetur quibusdam maxime nesciunt porro modi ipsam, nemo
+                molestias saepe aut quaerat architecto consectetur cum velit
+                fugit inventore! Praesentium iste, voluptatem eius doloribus ab
+                magnam doloremque debitis asperiores?
+            </div>
+        </>
     );
 }

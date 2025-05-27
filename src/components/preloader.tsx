@@ -5,9 +5,11 @@ import { usePreloaderStore } from "@/store/preloader-store";
 import { ROUTES_TO_PREFETCH } from "@/lib/constants";
 import { useRouter } from "next/navigation";
 import gsap from "gsap";
+import { useWindowSize } from "react-use";
 
 const Preloader = () => {
     const totalDuration = 2000;
+    const { width } = useWindowSize();
 
     const router = useRouter();
     const preloaderRef = useRef<HTMLDivElement>(null);
@@ -80,7 +82,7 @@ const Preloader = () => {
         };
 
         gsap.to(progressBarRef.current, {
-            width: "400px",
+            width: width > 400 ? "400px" : "77vw",
             duration: totalDuration / 1000, // Convert ms to seconds
             ease: "circ.inOut",
         });
@@ -134,6 +136,7 @@ const Preloader = () => {
         setHasShown,
         router,
         greetings.length,
+        width,
     ]);
 
     return (
@@ -146,7 +149,7 @@ const Preloader = () => {
             <div className="flex flex-1 items-center justify-center">
                 <div
                     ref={textContainerRef}
-                    className="text-center text-8xl font-light tracking-wider text-white transition-all duration-300"
+                    className="text-center text-[clamp(2rem,15vw,6rem)] font-light tracking-wider text-white transition-all duration-300"
                     style={{
                         fontFamily: "Inter, sans-serif",
                         minHeight: "1.2em",
@@ -159,7 +162,7 @@ const Preloader = () => {
             <div className="fixed bottom-5 flex flex-col items-center justify-center gap-2">
                 {/* <div>{progress}</div> */}
                 <div
-                    className="bg-foreground h-1 w-0 max-w-[77%] rounded-full"
+                    className="bg-foreground h-1 w-0 rounded-full"
                     ref={progressBarRef}
                 >
                     &nbsp;

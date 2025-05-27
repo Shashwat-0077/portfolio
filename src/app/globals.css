@@ -2,19 +2,26 @@
 @import "tw-animate-css";
 
 
+@font-face {
+    font-family: "Jersey10";
+    src: url("/fonts/Jersey10-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
 /* Apply view-transition-name via CSS */
 .page-content {
     view-transition-name: main-content;
 }
 
+@view-transition {
+    navigation: auto;
+}
+
 /* View transition animations */
 ::view-transition-old(main-content),
 ::view-transition-new(main-content) {
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
     animation-fill-mode: forwards;
 }
 
@@ -33,7 +40,7 @@
     }
 
     to {
-        opacity: 0.2;
+        opacity: 0.1;
         transform: translateY(-35%);
     }
 }
@@ -49,6 +56,7 @@
 }
 
 :root {
+    --jersey-font: "Jersey10", sans-serif;
     --background: #242424;
     --foreground: #fafafa;
     --card: #0a0a0a;
@@ -59,7 +67,7 @@
     --primary-foreground: #171717;
     --secondary: #262626;
     --secondary-foreground: #fafafa;
-    --muted: #262626;
+    --muted: #868686;
     --muted-foreground: #a3a3a3;
     --accent: #262626;
     --accent-foreground: #fafafa;
@@ -102,27 +110,75 @@
     --color-chart-4: var(--chart-4);
     --color-chart-5: var(--chart-5);
     --radius: var(--radius);
+    --font-jersey: var(--jersey-font);
 }
+
+@layer base {}
+
+
+
 
 @layer base {
+
+    * {
+        box-sizing: border-box;
+    }
+
+
     body {
-        background-color: #1e1e1e;
+        /* background-color: var(--background); */
+        background-color: black;
         color: var(--foreground)
     }
-}
+
+    input[type="number"] {
+        -webkit-appearance: textfield;
+        /* Chrome, Safari, Edge */
+        -moz-appearance: textfield;
+        /* Firefox */
+        appearance: textfield;
+    }
+
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        /* Chrome, Safari, Edge */
+        margin: 0;
+    }
+
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: var(--background);
+        border-radius: 10px;
+    }
+
+    /* ::-webkit-scrollbar-thumb {
+        background: var(--muted);
+        border-radius: 10px;
+    } */
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--primary);
+    }
+
+    /* Restore cursor pointer for interactive elements */
+    button:not(:disabled),
+    [role="button"]:not(:disabled),
+    input[type="button"]:not(:disabled),
+    input[type="submit"]:not(:disabled),
+    input[type="reset"]:not(:disabled) {
+        cursor: pointer;
+    }
+
+    /* Specifically target shadcn button components */
+    [data-slot="button"]:not(:disabled),
+    .inline-flex.items-center.justify-center:not(:disabled) {
+        cursor: pointer;
+    }
 
 
-/* Restore cursor pointer for interactive elements */
-button:not(:disabled),
-[role="button"]:not(:disabled),
-input[type="button"]:not(:disabled),
-input[type="submit"]:not(:disabled),
-input[type="reset"]:not(:disabled) {
-    cursor: pointer;
-}
-
-/* Specifically target shadcn button components */
-[data-slot="button"]:not(:disabled),
-.inline-flex.items-center.justify-center:not(:disabled) {
-    cursor: pointer;
 }

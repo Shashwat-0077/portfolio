@@ -8,7 +8,7 @@ export const animateDockIn = async (
         const tl = gsap.timeline();
 
         gsap.set(dock, {
-            opacity: 0.5,
+            filter: "brightness(0.5)",
             padding: 0,
             y: 10,
             boxShadow: "0 0 0 rgba(0, 0, 0, 0)",
@@ -22,7 +22,7 @@ export const animateDockIn = async (
         tl
             // Show dock first
             .to(dock, {
-                opacity: 1,
+                filter: "brightness(1)",
                 y: 0,
                 boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
                 duration: 0.3,
@@ -72,7 +72,7 @@ export const animateDockOut = (
             )
             .to(dock, {
                 y: 10,
-                opacity: 0.5,
+                filter: "brightness(0.5)",
                 boxShadow: "0 0 0 rgba(0, 0, 0, 0)",
                 duration: 0.3,
                 ease: "power2.inOut",

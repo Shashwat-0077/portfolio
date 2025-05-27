@@ -61,15 +61,12 @@ const TransitionLink = ({
 
         try {
             if (hasViewTransitionSupport && dock) {
-                // Step 1: Animate dock out
                 await animateDockOut(dock, inactiveLinks);
 
-                // Step 2: Start view transition
                 const transition = document.startViewTransition(() => {
-                    router.push(path);
+                    router.push(path, {});
                 });
 
-                // Step 3: When transition finishes, bring dock back
                 await transition.finished;
             } else {
                 // For browsers without View Transition support - no dock animation
@@ -94,13 +91,13 @@ const TransitionLink = ({
     };
 
     return (
-        <button
+        <a
             className={className}
             onClick={(e) => handleNavigation(e, href)}
             type="button"
         >
             {children}
-        </button>
+        </a>
     );
 };
 
