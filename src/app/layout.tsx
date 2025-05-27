@@ -1,8 +1,12 @@
+"use client";
+
 import type React from "react";
 import "./globals.css";
+import { ViewTransitions } from "next-view-transitions";
+import ReactLenis from "@studio-freight/react-lenis";
+
 import CursorAnimation from "@/components/ui/cursor-animation";
 import Preloader from "@/components/preloader";
-import { ViewTransitions } from "next-view-transitions";
 
 export default function RootLayout({
     children,
@@ -46,7 +50,9 @@ export default function RootLayout({
                 <body>
                     <Preloader />
                     <CursorAnimation />
-                    {children}
+                    <ReactLenis root>
+                        <div>{children}</div>
+                    </ReactLenis>
                 </body>
             </html>
         </ViewTransitions>

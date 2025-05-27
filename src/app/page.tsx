@@ -1,11 +1,13 @@
+import { ChevronDown, ChevronRight, Download } from "lucide-react";
+
 import TransitionLink from "@/components/transition-link";
 import { Button } from "@/components/ui/button";
 import Dock from "@/components/ui/dock";
-import { ChevronDown, ChevronRight, Download } from "lucide-react";
 
 export default function HomePage() {
     return (
         <>
+            {/* Hero Section */}
             <section className="bg-background relative flex min-h-screen flex-col items-center justify-center text-white">
                 <Dock />
 
@@ -32,6 +34,7 @@ export default function HomePage() {
                     <Button
                         asChild
                         size="lg"
+                        variant=""
                         className="bg-primary hover:bg-primary/90 flex cursor-pointer items-center justify-center text-white"
                     >
                         <TransitionLink href="/projects">
@@ -43,7 +46,6 @@ export default function HomePage() {
                     <Button
                         asChild
                         size="lg"
-                        variant=""
                         className="text-primary hover:text-primary gap-0 border-transparent bg-transparent shadow-none ring-0 hover:bg-transparent"
                         href="/contact"
                     >
@@ -58,175 +60,13 @@ export default function HomePage() {
                     </Button>
                 </div>
 
-                <div className="fixed bottom-8 flex items-center justify-center">
+                <div className="absolute bottom-8 flex items-center justify-center">
                     <ChevronDown className="text-muted-foreground mt-8 size-12 animate-bounce" />
                 </div>
             </section>
-            <div>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Doloremque, at numquam asperiores eius soluta laboriosam ab in
-                sunt officiis inventore hic deleniti dolorem aut magni
-                excepturi. Eos, iure! Odit vitae ab asperiores minus nihil
-                officiis cumque eaque incidunt eligendi eius, corporis sint
-                optio veritatis dolore eveniet saepe blanditiis reprehenderit
-                molestias aspernatur doloribus neque consequuntur debitis
-                tenetur? Sapiente velit obcaecati reiciendis tenetur, error
-                minima labore! Ab ut facilis dicta amet voluptates error aperiam
-                tenetur quibusdam maxime nesciunt porro modi ipsam, nemo
-                molestias saepe aut quaerat architecto consectetur cum velit
-                fugit inventore! Praesentium iste, voluptatem eius doloribus ab
-                magnam doloremque debitis asperiores?
-            </div>
-            <div>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Doloremque, at numquam asperiores eius soluta laboriosam ab in
-                sunt officiis inventore hic deleniti dolorem aut magni
-                excepturi. Eos, iure! Odit vitae ab asperiores minus nihil
-                officiis cumque eaque incidunt eligendi eius, corporis sint
-                optio veritatis dolore eveniet saepe blanditiis reprehenderit
-                molestias aspernatur doloribus neque consequuntur debitis
-                tenetur? Sapiente velit obcaecati reiciendis tenetur, error
-                minima labore! Ab ut facilis dicta amet voluptates error aperiam
-                tenetur quibusdam maxime nesciunt porro modi ipsam, nemo
-                molestias saepe aut quaerat architecto consectetur cum velit
-                fugit inventore! Praesentium iste, voluptatem eius doloribus ab
-                magnam doloremque debitis asperiores?
-            </div>
-            <div>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Doloremque, at numquam asperiores eius soluta laboriosam ab in
-                sunt officiis inventore hic deleniti dolorem aut magni
-                excepturi. Eos, iure! Odit vitae ab asperiores minus nihil
-                officiis cumque eaque incidunt eligendi eius, corporis sint
-                optio veritatis dolore eveniet saepe blanditiis reprehenderit
-                molestias aspernatur doloribus neque consequuntur debitis
-                tenetur? Sapiente velit obcaecati reiciendis tenetur, error
-                minima labore! Ab ut facilis dicta amet voluptates error aperiam
-                tenetur quibusdam maxime nesciunt porro modi ipsam, nemo
-                molestias saepe aut quaerat architecto consectetur cum velit
-                fugit inventore! Praesentium iste, voluptatem eius doloribus ab
-                magnam doloremque debitis asperiores?
-            </div>
-            <div>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Doloremque, at numquam asperiores eius soluta laboriosam ab in
-                sunt officiis inventore hic deleniti dolorem aut magni
-                excepturi. Eos, iure! Odit vitae ab asperiores minus nihil
-                officiis cumque eaque incidunt eligendi eius, corporis sint
-                optio veritatis dolore eveniet saepe blanditiis reprehenderit
-                molestias aspernatur doloribus neque consequuntur debitis
-                tenetur? Sapiente velit obcaecati reiciendis tenetur, error
-                minima labore! Ab ut facilis dicta amet voluptates error aperiam
-                tenetur quibusdam maxime nesciunt porro modi ipsam, nemo
-                molestias saepe aut quaerat architecto consectetur cum velit
-                fugit inventore! Praesentium iste, voluptatem eius doloribus ab
-                magnam doloremque debitis asperiores?
-            </div>
-            <div>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Doloremque, at numquam asperiores eius soluta laboriosam ab in
-                sunt officiis inventore hic deleniti dolorem aut magni
-                excepturi. Eos, iure! Odit vitae ab asperiores minus nihil
-                officiis cumque eaque incidunt eligendi eius, corporis sint
-                optio veritatis dolore eveniet saepe blanditiis reprehenderit
-                molestias aspernatur doloribus neque consequuntur debitis
-                tenetur? Sapiente velit obcaecati reiciendis tenetur, error
-                minima labore! Ab ut facilis dicta amet voluptates error aperiam
-                tenetur quibusdam maxime nesciunt porro modi ipsam, nemo
-                molestias saepe aut quaerat architecto consectetur cum velit
-                fugit inventore! Praesentium iste, voluptatem eius doloribus ab
-                magnam doloremque debitis asperiores?
-            </div>
-            <div>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Doloremque, at numquam asperiores eius soluta laboriosam ab in
-                sunt officiis inventore hic deleniti dolorem aut magni
-                excepturi. Eos, iure! Odit vitae ab asperiores minus nihil
-                officiis cumque eaque incidunt eligendi eius, corporis sint
-                optio veritatis dolore eveniet saepe blanditiis reprehenderit
-                molestias aspernatur doloribus neque consequuntur debitis
-                tenetur? Sapiente velit obcaecati reiciendis tenetur, error
-                minima labore! Ab ut facilis dicta amet voluptates error aperiam
-                tenetur quibusdam maxime nesciunt porro modi ipsam, nemo
-                molestias saepe aut quaerat architecto consectetur cum velit
-                fugit inventore! Praesentium iste, voluptatem eius doloribus ab
-                magnam doloremque debitis asperiores?
-            </div>
-            <div>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Doloremque, at numquam asperiores eius soluta laboriosam ab in
-                sunt officiis inventore hic deleniti dolorem aut magni
-                excepturi. Eos, iure! Odit vitae ab asperiores minus nihil
-                officiis cumque eaque incidunt eligendi eius, corporis sint
-                optio veritatis dolore eveniet saepe blanditiis reprehenderit
-                molestias aspernatur doloribus neque consequuntur debitis
-                tenetur? Sapiente velit obcaecati reiciendis tenetur, error
-                minima labore! Ab ut facilis dicta amet voluptates error aperiam
-                tenetur quibusdam maxime nesciunt porro modi ipsam, nemo
-                molestias saepe aut quaerat architecto consectetur cum velit
-                fugit inventore! Praesentium iste, voluptatem eius doloribus ab
-                magnam doloremque debitis asperiores?
-            </div>
-            <div>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Doloremque, at numquam asperiores eius soluta laboriosam ab in
-                sunt officiis inventore hic deleniti dolorem aut magni
-                excepturi. Eos, iure! Odit vitae ab asperiores minus nihil
-                officiis cumque eaque incidunt eligendi eius, corporis sint
-                optio veritatis dolore eveniet saepe blanditiis reprehenderit
-                molestias aspernatur doloribus neque consequuntur debitis
-                tenetur? Sapiente velit obcaecati reiciendis tenetur, error
-                minima labore! Ab ut facilis dicta amet voluptates error aperiam
-                tenetur quibusdam maxime nesciunt porro modi ipsam, nemo
-                molestias saepe aut quaerat architecto consectetur cum velit
-                fugit inventore! Praesentium iste, voluptatem eius doloribus ab
-                magnam doloremque debitis asperiores?
-            </div>
-            <div>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Doloremque, at numquam asperiores eius soluta laboriosam ab in
-                sunt officiis inventore hic deleniti dolorem aut magni
-                excepturi. Eos, iure! Odit vitae ab asperiores minus nihil
-                officiis cumque eaque incidunt eligendi eius, corporis sint
-                optio veritatis dolore eveniet saepe blanditiis reprehenderit
-                molestias aspernatur doloribus neque consequuntur debitis
-                tenetur? Sapiente velit obcaecati reiciendis tenetur, error
-                minima labore! Ab ut facilis dicta amet voluptates error aperiam
-                tenetur quibusdam maxime nesciunt porro modi ipsam, nemo
-                molestias saepe aut quaerat architecto consectetur cum velit
-                fugit inventore! Praesentium iste, voluptatem eius doloribus ab
-                magnam doloremque debitis asperiores?
-            </div>
-            <div>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Doloremque, at numquam asperiores eius soluta laboriosam ab in
-                sunt officiis inventore hic deleniti dolorem aut magni
-                excepturi. Eos, iure! Odit vitae ab asperiores minus nihil
-                officiis cumque eaque incidunt eligendi eius, corporis sint
-                optio veritatis dolore eveniet saepe blanditiis reprehenderit
-                molestias aspernatur doloribus neque consequuntur debitis
-                tenetur? Sapiente velit obcaecati reiciendis tenetur, error
-                minima labore! Ab ut facilis dicta amet voluptates error aperiam
-                tenetur quibusdam maxime nesciunt porro modi ipsam, nemo
-                molestias saepe aut quaerat architecto consectetur cum velit
-                fugit inventore! Praesentium iste, voluptatem eius doloribus ab
-                magnam doloremque debitis asperiores?
-            </div>
-            <div>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Doloremque, at numquam asperiores eius soluta laboriosam ab in
-                sunt officiis inventore hic deleniti dolorem aut magni
-                excepturi. Eos, iure! Odit vitae ab asperiores minus nihil
-                officiis cumque eaque incidunt eligendi eius, corporis sint
-                optio veritatis dolore eveniet saepe blanditiis reprehenderit
-                molestias aspernatur doloribus neque consequuntur debitis
-                tenetur? Sapiente velit obcaecati reiciendis tenetur, error
-                minima labore! Ab ut facilis dicta amet voluptates error aperiam
-                tenetur quibusdam maxime nesciunt porro modi ipsam, nemo
-                molestias saepe aut quaerat architecto consectetur cum velit
-                fugit inventore! Praesentium iste, voluptatem eius doloribus ab
-                magnam doloremque debitis asperiores?
-            </div>
+
+            {/* Tech section */}
+            <section></section>
         </>
     );
 }

@@ -123,3 +123,63 @@ export const PageAnimations = {
         );
     },
 };
+
+export const PreloaderAnimations = {
+    animateOut: ({
+        preloader,
+        textContainer,
+        setHasShown,
+        setIsLoading,
+    }: {
+        preloader: HTMLDivElement | null;
+        textContainer: HTMLDivElement | null;
+        setHasShown: (value: boolean) => void;
+        setIsLoading: (value: boolean) => void;
+    }) => {
+        if (!preloader || !textContainer) {
+            return;
+        }
+
+        const tl = gsap.timeline({
+            onComplete: () => {
+                setHasShown(true);
+            },
+        });
+
+        // First fade out the text
+        tl.to(textContainer, {
+            opacity: 0.5,
+            scale: 0.8,
+            duration: 0.5,
+            ease: "power2.in",
+            onComplete: () => {
+                setIsLoading(false);
+            },
+        })
+            // Then slide the entire preloader up
+            .to(preloader, {
+                y: "-100%",
+                duration: 1.2,
+                ease: "power4.inOut",
+                delay: 0.2,
+            });
+    },
+};
+
+export const ProgressBarAnimations = {
+    animate: ({
+        progressBar,
+        width,
+        totalDuration,
+    }: {
+        progressBar: HTMLDivElement | null;
+        width: number;
+        totalDuration: number;
+    }) => {
+        gsap.to(progressBar, {
+            width: width > 400 ? "400px" : "77vw",
+            duration: totalDuration / 1000, // Convert ms to seconds
+            ease: "circ.inOut",
+        });
+    },
+};

@@ -2,9 +2,11 @@
 
 import { usePathname } from "next/navigation";
 import type React from "react";
+import { useTransitionRouter } from "next-view-transitions";
+import Link from "next/link";
+
 import { useAnimationStore } from "@/store/animation-store";
 import { BROWSER_SUPPORT } from "@/lib/constants";
-import { useTransitionRouter } from "next-view-transitions";
 import { DockAnimations, PageAnimations } from "@/lib/animations";
 
 const TransitionLink = ({
@@ -64,7 +66,6 @@ const TransitionLink = ({
         try {
             if (hasViewTransitionSupport && dock) {
                 await DockAnimations.animateOut(dock, inactiveLinks);
-
                 router.push(path, {
                     onTransitionReady: PageAnimations.slideInAndOut,
                 });
@@ -75,9 +76,7 @@ const TransitionLink = ({
                 // Small delay to simulate navigation
                 await new Promise((resolve) => setTimeout(resolve, 100));
             }
-        } catch (error) {
-            console.error("Navigation error:", error);
-
+        } catch (_error) {
             // Reset dock state on error
             if (dock && hasViewTransitionSupport) {
                 dock.style.pointerEvents = "auto";
@@ -91,13 +90,15 @@ const TransitionLink = ({
     };
 
     return (
-        <a
+        <Link
+            href={href}
+            prefetch={true}
             className={className}
             onClick={(e) => handleNavigation(e, href)}
             type="button"
         >
             {children}
-        </a>
+        </Link>
     );
 };
 

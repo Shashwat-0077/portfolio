@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+
 import { useAnimationStore } from "@/store/animation-store";
 import { usePreloaderStore } from "@/store/preloader-store";
 import { ANIMATION_CONSTANTS } from "@/lib/constants";
@@ -12,7 +13,7 @@ const CursorAnimation = () => {
 
     useEffect(() => {
         // Don't initialize cursor animation during preloader
-        if (isLoading) return;
+        if (isLoading) {return;}
 
         // Inject keyframes into the document only once
         const styleId = "click-rays-style";

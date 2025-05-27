@@ -3,17 +3,18 @@
 import React from "react";
 import { useRef } from "react";
 import { usePathname } from "next/navigation";
+import { useGSAP } from "@gsap/react";
+import { TooltipTrigger } from "@radix-ui/react-tooltip";
+
 import TransitionLink from "@/components/transition-link";
 import { ANIMATION_CONSTANTS, BROWSER_SUPPORT, ROUTES } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { usePreloaderStore } from "@/store/preloader-store";
-import { useGSAP } from "@gsap/react";
 import {
     Tooltip,
     TooltipContent,
     TooltipProvider,
 } from "@/components/ui/tooltip";
-import { TooltipTrigger } from "@radix-ui/react-tooltip";
 import { DockAnimations } from "@/lib/animations";
 
 const Dock = () => {
