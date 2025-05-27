@@ -24,7 +24,7 @@ export default function HomePage() {
                     </span>
                     , based in Himachal Pradesh, blending logic with creativity
                     <br />
-                    to build taught-full{" "}
+                    to build taught-full
                     <span className="decoration-primary underline decoration-dotted decoration-2 underline-offset-4">
                         software
                     </span>
@@ -47,7 +47,6 @@ export default function HomePage() {
                         asChild
                         size="lg"
                         className="text-primary hover:text-primary gap-0 border-transparent bg-transparent shadow-none ring-0 hover:bg-transparent"
-                        href="/contact"
                     >
                         <a
                             href="/resume.pdf"
