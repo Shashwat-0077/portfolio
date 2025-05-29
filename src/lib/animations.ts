@@ -77,6 +77,7 @@ export const DockAnimations = {
                     filter: "brightness(0.5)",
                     boxShadow: "0 0 0 rgba(0, 0, 0, 0)",
                     duration: 0.3,
+                    fill: "forwards",
                     ease: "power2.inOut",
                     onComplete: resolve,
                 });
@@ -93,7 +94,7 @@ export const PageAnimations = {
                     transform: "translateY(0)",
                 },
                 {
-                    opacity: 0.2,
+                    opacity: 0.7,
                     transform: "translateY(-35%)",
                 },
             ],
