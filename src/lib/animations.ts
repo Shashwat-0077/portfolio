@@ -1,32 +1,51 @@
 import gsap from "gsap";
 
+const DOCK_BOX_SHADOW_ACTIVE = "rgba(0, 0, 0, 0.45) 0px 10px 20px -10px";
+const DOCK_BOX_SHADOW_INACTIVE = "rgba(0, 0, 0, 0) 0px 0px 0px 0px";
+
 export const DockAnimations = {
-    animateIn: async (dock: HTMLElement, inactiveLinks: HTMLElement[]) => {
+    animateIn: async ({
+        dock,
+        inactiveLinks,
+        dockContainer,
+    }: {
+        dock: HTMLDivElement;
+        inactiveLinks: HTMLElement[];
+        dockContainer: HTMLDivElement;
+    }) => {
         return new Promise((resolve) => {
             const tl = gsap.timeline();
 
-            gsap.set(dock, {
-                filter: "brightness(0.5)",
-                padding: 0,
+            gsap.set(dockContainer, {
                 y: 10,
-                boxShadow: "0 0 0 rgba(0, 0, 0, 0)",
+                boxShadow: DOCK_BOX_SHADOW_INACTIVE,
+            });
+
+            gsap.set(dock, {
+                opacity: 0.5,
+                padding: 0,
             });
 
             gsap.set(inactiveLinks, {
                 width: 0,
             });
-            // TODO: Need tp implement a better animation for the dock
-            // Animation sequence
-            tl
-                // Show dock first
-                .to(dock, {
-                    filter: "brightness(1)",
-                    y: 0,
-                    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-                    duration: 0.3,
-                    ease: "power2.out",
-                    delay: 1.5,
-                })
+
+            tl.to(dockContainer, {
+                y: 0,
+                duration: 0.3,
+                ease: "power2.out",
+                delay: 1.5,
+                boxShadow: DOCK_BOX_SHADOW_ACTIVE,
+            })
+                .to(
+                    dock,
+                    {
+                        opacity: 1,
+                        duration: 0.3,
+                        ease: "power2.inOut",
+                    },
+                    "<"
+                )
                 .to(dock, {
                     padding: "0 1.75rem",
                     duration: 0.3,
@@ -39,7 +58,7 @@ export const DockAnimations = {
                         duration: 0.3,
                         ease: "back.out(1.7)",
                         onComplete: () => {
-                            dock.style.pointerEvents = "auto";
+                            dockContainer.style.pointerEvents = "auto";
                             resolve({
                                 done: true,
                             });
@@ -49,11 +68,16 @@ export const DockAnimations = {
                 );
         });
     },
-    animateOut: (
-        dock: HTMLElement,
-        inactiveLinks: HTMLElement[]
-    ): Promise<void> => {
-        dock.style.pointerEvents = "none";
+    animateOut: ({
+        dock,
+        inactiveLinks,
+        dockContainer,
+    }: {
+        dock: HTMLDivElement;
+        inactiveLinks: HTMLElement[];
+        dockContainer: HTMLDivElement;
+    }): Promise<void> => {
+        dockContainer.style.pointerEvents = "none";
 
         return new Promise((resolve) => {
             const tl = gsap.timeline();
@@ -73,14 +97,23 @@ export const DockAnimations = {
                     "<"
                 )
                 .to(dock, {
-                    y: 10,
-                    filter: "brightness(0.5)",
-                    boxShadow: "0 0 0 rgba(0, 0, 0, 0)",
+                    opacity: 0.5,
                     duration: 0.3,
                     fill: "forwards",
                     ease: "power2.inOut",
-                    onComplete: resolve,
-                });
+                })
+                .to(
+                    dockContainer,
+                    {
+                        y: 10,
+                        fill: "forwards",
+                        duration: 0.3,
+                        ease: "power2.inOut",
+                        boxShadow: DOCK_BOX_SHADOW_INACTIVE,
+                        onComplete: resolve,
+                    },
+                    "<"
+                );
         });
     },
 };
