@@ -44,7 +44,7 @@ const Dock = () => {
         <div
             data-dock
             ref={dockRef}
-            className="fixed top-6 left-1/2 flex -translate-x-1/2 items-center justify-center overflow-hidden rounded-full border border-[#737373] bg-[#3C3C3C] px-7 brightness-100"
+            className="border-border bg-primary-foreground fixed top-6 left-1/2 flex -translate-x-1/2 items-center justify-center overflow-hidden rounded-full border px-7 brightness-100"
             style={{
                 zIndex: ANIMATION_CONSTANTS.DOCK_Z_INDEX,
             }}

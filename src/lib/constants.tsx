@@ -1,9 +1,14 @@
 import { Hammer, Home, LayoutDashboard, Phone } from "lucide-react";
-import { IconBaseProps } from "react-icons";
-import { BiLogoGit } from "react-icons/bi";
-import { RiNextjsLine, RiTailwindCssFill } from "react-icons/ri";
-import { SiDrizzle, SiExpress, SiMongodb, SiTypescript } from "react-icons/si";
-import { TbSql } from "react-icons/tb";
+import {
+    SiTypescript,
+    SiNextdotjs,
+    SiTailwindcss,
+    SiExpress,
+    SiDocker,
+    SiGit,
+    SiDrizzle,
+} from "react-icons/si";
+import { FaZ } from "react-icons/fa6"; // Zustand (custom placeholder icon)
 
 // Animation timing constants
 export const ANIMATION_CONSTANTS = {
@@ -66,158 +71,45 @@ export const ROUTES = [
 ];
 export const ROUTES_TO_PREFETCH = ROUTES.map(({ path }) => path);
 
-export type Technology = {
-    icon: React.ReactElement<IconBaseProps>;
-    name: string;
-    description: string;
-    color: string;
-};
-
-export const TECHNOLOGIES: Technology[] = [
-    {
-        icon: <SiTypescript />,
-        name: "TypeScript",
-        description: "Programming language",
-        color: "#007acc",
+export const TECHNOLOGIES = {
+    TypeScript: {
+        title: "TypeScript",
+        description: "Type safe JavaScript",
+        icon: <SiTypescript size={36} className="text-[#3178C6]" />,
     },
-    {
-        icon: <RiNextjsLine />,
-        name: "Next.js",
-        description: "React framework",
-        color: "#ffffff",
+    "Next.js": {
+        title: "Next.js",
+        description: "React framework for SSR & routing",
+        icon: <SiNextdotjs size={36} className="text-[#000000]" />,
     },
-    {
-        icon: <BiLogoGit />,
-        name: "GIT",
-        description: "Version control system",
-        color: "#f05032",
-    },
-    {
-        icon: <RiTailwindCssFill />,
-        name: "Tailwind CSS",
+    "Tailwind CSS": {
+        title: "Tailwind CSS",
         description: "Utility-first CSS framework",
-        color: "#38bdf8",
+        icon: <SiTailwindcss size={36} className="text-[#06B6D4]" />,
     },
-    {
-        icon: <SiExpress />,
-        name: "Express.js",
-        description: "Web application framework for Node.js",
-        color: "#ffffff",
+    Express: {
+        title: "Express",
+        description: "Minimal Node.js web framework",
+        icon: <SiExpress size={36} className="text-[#ffffff]" />,
     },
-    {
-        icon: <SiDrizzle />,
-        name: "Drizzle ORM",
-        description: "TypeScript ORM for SQL databases",
-        color: "#4c51bf",
+    Zustand: {
+        title: "Zustand",
+        description: "Simple and scalable state management",
+        icon: <FaZ size={36} className="text-[#000000]" />,
     },
-    {
-        icon: <TbSql />,
-        name: "SQL",
-        description: "Language for managing databases",
-        color: "#4479a1",
+    "Drizzle ORM": {
+        title: "Drizzle ORM",
+        description: "Type-safe SQL ORM for TypeScript",
+        icon: <SiDrizzle size={36} className="text-[#ffda6b]" />,
     },
-    {
-        icon: <SiMongodb />,
-        name: "MongoDB",
-        description: "NoSQL database",
-        color: "#47a248",
+    Git: {
+        title: "Git",
+        description: "Version control for code collaboration",
+        icon: <SiGit size={36} className="text-[#F05032]" />,
     },
-];
-
-export interface Project {
-    id: string;
-    title: string;
-    appIcon: string;
-    description: string;
-    image: string;
-    techStack: Technology[];
-    liveUrl?: string;
-    githubUrl?: string;
-}
-
-export const PROJECTS: Project[] = [
-    {
-        id: "ecommerce-dashboard",
-        title: "E-Commerce Dashboard",
-        appIcon: "/icons/dashboard.png",
-        description:
-            "A comprehensive admin dashboard for managing products, orders, and analytics with real-time data visualization.",
-        image: "/projects/ecommerce-dashboard.jpg",
-        techStack: [
-            TECHNOLOGIES[1],
-            TECHNOLOGIES[0],
-            TECHNOLOGIES[5],
-            TECHNOLOGIES[6],
-        ], // Next.js, TypeScript, Drizzle, SQL
-        liveUrl: "https://ecommerce-dashboard-demo.vercel.app",
-        githubUrl: "https://github.com/username/ecommerce-dashboard",
+    Docker: {
+        title: "Docker",
+        description: "Containerized application deployment",
+        icon: <SiDocker size={36} className="text-[#2496ED]" />,
     },
-    {
-        id: "task-management-app",
-        title: "Task Management System",
-        appIcon: "/icons/tasks.png",
-        description:
-            "A collaborative task management application with drag-and-drop functionality, team collaboration, and progress tracking.",
-        image: "/projects/task-manager.jpg",
-        techStack: [
-            TECHNOLOGIES[1],
-            TECHNOLOGIES[0],
-            TECHNOLOGIES[3],
-            TECHNOLOGIES[7],
-        ], // Next.js, TypeScript, Tailwind, MongoDB
-        liveUrl: "https://taskflow-app.vercel.app",
-        githubUrl: "https://github.com/username/task-management",
-    },
-    {
-        id: "weather-forecast-app",
-        title: "Weather Forecast App",
-        appIcon: "/icons/weather.png",
-        description:
-            "Real-time weather application with location-based forecasts, interactive maps, and weather alerts.",
-        image: "/projects/weather-app.jpg",
-        techStack: [TECHNOLOGIES[1], TECHNOLOGIES[0], TECHNOLOGIES[3]], // Next.js, TypeScript, Tailwind
-        liveUrl: "https://weather-forecast-pro.vercel.app",
-    },
-    {
-        id: "blog-platform",
-        title: "Modern Blog Platform",
-        appIcon: "/icons/blog.png",
-        description:
-            "A full-stack blogging platform with markdown support, commenting system, and SEO optimization.",
-        image: "/projects/blog-platform.jpg",
-        techStack: [
-            TECHNOLOGIES[1],
-            TECHNOLOGIES[0],
-            TECHNOLOGIES[4],
-            TECHNOLOGIES[7],
-        ], // Next.js, TypeScript, Express, MongoDB
-        liveUrl: "https://modern-blog-platform.vercel.app",
-        githubUrl: "https://github.com/username/blog-platform",
-    },
-    {
-        id: "portfolio-website",
-        title: "Interactive Portfolio",
-        appIcon: "/icons/portfolio.png",
-        description:
-            "A creative portfolio website with smooth animations, dark mode support, and responsive design.",
-        image: "/projects/portfolio.jpg",
-        techStack: [TECHNOLOGIES[1], TECHNOLOGIES[0], TECHNOLOGIES[3]], // Next.js, TypeScript, Tailwind
-        liveUrl: "https://creative-portfolio.vercel.app",
-        githubUrl: "https://github.com/username/portfolio",
-    },
-    {
-        id: "chat-application",
-        title: "Real-time Chat App",
-        appIcon: "/icons/chat.png",
-        description:
-            "A modern chat application with real-time messaging, file sharing, and group chat functionality.",
-        image: "/projects/chat-app.jpg",
-        techStack: [
-            TECHNOLOGIES[1],
-            TECHNOLOGIES[0],
-            TECHNOLOGIES[4],
-            TECHNOLOGIES[7],
-        ], // Next.js, TypeScript, Express, MongoDB
-        githubUrl: "https://github.com/username/chat-app",
-    },
-];
+};

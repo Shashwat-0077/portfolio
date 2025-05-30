@@ -1,5 +1,6 @@
 import Dock from "@/components/ui/dock";
 import HeroSection from "@/components/pages/home/HeroSection";
+import TechSection from "@/components/pages/home/TechSection";
 
 export default function HomePage() {
     return (
@@ -9,6 +10,7 @@ export default function HomePage() {
                 {/* Hero Section */}
                 <HeroSection />
                 {/* Tech section */}
+                <TechSection />
                 {/* Projects */}
                 {/* Timeline */}
             </div>
