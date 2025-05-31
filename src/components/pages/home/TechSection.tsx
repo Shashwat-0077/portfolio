@@ -1,5 +1,6 @@
 "use client";
 
+import { MoveRight } from "lucide-react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
@@ -36,9 +37,10 @@ const TechSection = () => {
     });
 
     return (
-        <section className="mx-auto max-w-[90svw] py-20">
-            <h2 className="mb-8 text-3xl font-bold tracking-tight">
-                Latest tech I know
+        <section className="mx-auto max-w-[90svw] py-32">
+            <h2 className="mb-8 text-3xl">
+                Some <span className="text-primary">Skills</span> &{" "}
+                <span className="text-primary">Technologies</span>
             </h2>
             <style jsx>{`
                 #cards:hover > .card > .card-border {
@@ -65,10 +67,10 @@ const TechSection = () => {
                             key={title}
                         >
                             {/* card border */}
-                            <div className="card-border absolute top-0 left-0 z-[1] h-full w-full border-inherit bg-[radial-gradient(400px_circle_at_var(--mouse-x)_var(--mouse-y),rgba(255,255,255,0.5),transparent_40%)] opacity-0 transition-opacity duration-300 content-['']" />
+                            <div className="card-border absolute top-0 left-0 z-[1] h-full w-full border-inherit bg-[radial-gradient(400px_circle_at_var(--mouse-x)_var(--mouse-y),rgba(112,119,255,0.5),transparent_40%)] opacity-0 transition-opacity duration-300 content-['']" />
 
                             {/* card before (mimic pseudo element) */}
-                            <div className="card-before absolute top-0 left-0 z-[3] h-full w-full border-inherit bg-[radial-gradient(800px_circle_at_var(--mouse-x)_var(--mouse-y),rgba(255,255,255,0.06),transparent_40%)] opacity-0 transition-opacity duration-300 content-[''] group-hover:opacity-100" />
+                            <div className="card-before absolute top-0 left-0 z-[3] h-full w-full border-inherit bg-[radial-gradient(800px_circle_at_var(--mouse-x)_var(--mouse-y),rgba(112,119,255,0.1),transparent_40%)] opacity-0 transition-opacity duration-300 content-[''] group-hover:opacity-100" />
 
                             {/* card content */}
                             <div className="card-content relative z-[2] m-[1px] flex h-[calc(100%-2px)] w-[calc(100%-2px)] items-center justify-between gap-4 rounded-[inherit] bg-[#343434] p-6">
@@ -81,10 +83,14 @@ const TechSection = () => {
                                     </p>
                                 </div>
                                 <div className="flex-shrink-0">
-                                    <div className="bg-muted/50 flex items-center justify-center rounded-md p-2">
+                                    <div className="flex items-center justify-center rounded-md p-2">
                                         <Icon
                                             size={36}
-                                            color={defaultIconColor}
+                                            color={
+                                                defaultIconColor === "#000000"
+                                                    ? "#ffffff"
+                                                    : defaultIconColor
+                                            }
                                         />
                                     </div>
                                 </div>
@@ -92,6 +98,9 @@ const TechSection = () => {
                         </div>
                     );
                 })}
+            </div>
+            <div className="mt-7 flex items-center justify-end gap-3 text-xl">
+                View more <MoveRight />
             </div>
         </section>
     );

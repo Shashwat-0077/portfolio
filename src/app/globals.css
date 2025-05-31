@@ -10,8 +10,18 @@
     font-display: swap;
 }
 
+@font-face {
+    font-family: "Garet";
+    src: url("/fonts/Garet-Book.woff") format("woff");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+
 :root {
     --jersey-font: "Jersey10", sans-serif;
+    --garet-font: "Garet", sans-serif;
     --background: #242424;
     --foreground: #fafafa;
     --card: #0a0a0a;
@@ -69,6 +79,7 @@
     --color-border: var(--border);
     --radius: var(--radius);
     --font-jersey: var(--jersey-font);
+    --font-garet: var(--garet-font);
 
 }
 

@@ -92,7 +92,7 @@ const HeroSection = () => {
     });
 
     return (
-        <section className="bg-background relative flex min-h-screen flex-col items-center justify-center text-white">
+        <section className="relative flex min-h-screen flex-col items-center justify-center text-white">
             <div className="flex items-center justify-center gap-7">
                 <Magnetic className="cursor-pointer">
                     <Github size={30} />
@@ -105,7 +105,7 @@ const HeroSection = () => {
                 </Magnetic>
             </div>
 
-            <h1 className="font-jersey mt-10 px-4 text-center text-[clamp(2.5rem,17vw,6rem)] leading-[0.8]">
+            <h1 className="font-jersey mt-10 px-4 text-center text-[clamp(2.5rem,22vw,8rem)] leading-[0.8]">
                 <span ref={headerRef} className="main-heading">
                     Crafting <span className="text-primary">code</span>
                     <br />
@@ -114,13 +114,13 @@ const HeroSection = () => {
             </h1>
             <p
                 ref={paraRef}
-                className="text-muted relative mx-auto mt-6 mb-8 max-w-prose px-4 text-center text-[clamp(0.875rem,2.5vw,1.125rem)]"
+                className="text-muted relative mt-6 mb-8 max-w-prose text-center text-[clamp(0.875rem,2.5vw,1.125rem)]"
             >
                 I&apos;m{" "}
                 <span ref={shashwatRef} className="relative inline-block">
                     shashwat
                     <svg
-                        className="pointer-events-none absolute top-full left-0 -mt-1 h-2 w-full"
+                        className="pointer-events-none absolute top-full left-[0.5] -mt-1 h-2 w-full"
                         viewBox="0 0 100 5"
                         preserveAspectRatio="none"
                     >
@@ -143,7 +143,7 @@ const HeroSection = () => {
                 <span ref={softwareRef} className="relative inline-block">
                     software
                     <svg
-                        className="pointer-events-none absolute top-full left-0 -mt-1 h-2 w-full"
+                        className="pointer-events-none absolute top-full left-[0.5] -mt-1 h-2 w-full"
                         viewBox="0 0 100 5"
                         preserveAspectRatio="none"
                     >

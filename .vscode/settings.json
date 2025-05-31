@@ -3,6 +3,7 @@
         "Bodo",
         "doesn",
         "Dogri",
+        "garet",
         "gsap",
         "Himachal",
         "Khoi",
@@ -29,5 +30,6 @@
         "നമസ്കാരം",
         "ꯊꯧꯕꯥ",
         "ᱵᱟᱝᱜᱟ"
-    ]
+    ],
+    "svg.preview.background": "dark-transparent"
 }
