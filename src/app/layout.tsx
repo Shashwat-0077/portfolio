@@ -48,7 +48,7 @@ export default function RootLayout({
         <ViewTransitions>
             <html lang="en">
                 <body>
-                    <Preloader />
+                    {/* <Preloader /> */}
                     <CursorAnimation />
                     <ReactLenis root>
                         <div>{children}</div>

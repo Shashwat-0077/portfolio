@@ -7,9 +7,19 @@ import {
     SiDocker,
     SiGit,
     SiDrizzle,
+    SiMongodb,
 } from "react-icons/si";
-import { FaZ } from "react-icons/fa6"; // Zustand (custom placeholder icon)
 import { IconType } from "react-icons";
+import { FaAppleAlt, FaBeer, FaDragon } from "react-icons/fa";
+import { MdAlarm, MdBolt, MdPets } from "react-icons/md";
+import { GiAbstract049, GiCrystalBars, GiGooExplosion } from "react-icons/gi";
+import { AiFillBug, AiFillHeart, AiOutlineCloud } from "react-icons/ai";
+import { RiCameraLensLine, RiEarthLine, RiSunLine } from "react-icons/ri";
+import { BiCycling, BiGhost, BiRocket } from "react-icons/bi";
+import { TbHexagonLetterX, TbZodiacScorpio } from "react-icons/tb";
+import { LuMountain, LuShip } from "react-icons/lu";
+import { TiWeatherSnow } from "react-icons/ti";
+import { CgGames } from "react-icons/cg";
 
 // Animation timing constants
 export const ANIMATION_CONSTANTS = {
@@ -76,7 +86,7 @@ export type Technology = {
     [key: string]: {
         title: string;
         description: string;
-        Icon: IconType;
+        Icon: IconType | React.ComponentType<React.SVGProps<SVGSVGElement>>;
         defaultIconColor: string;
     };
 };
@@ -86,49 +96,49 @@ export const TECHNOLOGIES = {
         title: "TypeScript",
         description: "Type safe JavaScript",
         Icon: SiTypescript,
-        defaultIconColor: "#2496ED",
+        defaultIconColor: "#7077FF",
     },
     "Next.js": {
         title: "Next.js",
         description: "React framework for SSR & routing",
         Icon: SiNextdotjs,
-        defaultIconColor: "#000000",
+        defaultIconColor: "#7077FF",
     },
     "Tailwind CSS": {
         title: "Tailwind CSS",
         description: "Utility-first CSS framework",
         Icon: SiTailwindcss,
-        defaultIconColor: "#06B6D4",
+        defaultIconColor: "#7077FF",
     },
     Express: {
         title: "Express",
         description: "Minimal Node.js web framework",
         Icon: SiExpress,
-        defaultIconColor: "#000000",
+        defaultIconColor: "#7077FF",
     },
-    Zustand: {
-        title: "Zustand",
-        description: "Scalable state management",
-        Icon: FaZ,
-        defaultIconColor: "#000000",
+    MongoDB: {
+        title: "MongoDB",
+        description: "NoSQL database",
+        Icon: SiMongodb,
+        defaultIconColor: "#7077FF",
     },
     "Drizzle ORM": {
         title: "Drizzle ORM",
         description: "Type-safe SQL ORM for TypeScript",
         Icon: SiDrizzle,
-        defaultIconColor: "#C5F74F",
+        defaultIconColor: "#7077FF",
     },
     Git: {
         title: "Git",
         description: "Version control system",
         Icon: SiGit,
-        defaultIconColor: "#F05032",
+        defaultIconColor: "#7077FF",
     },
     Docker: {
         title: "Docker",
         description: "Containerization platform",
         Icon: SiDocker,
-        defaultIconColor: "#2496ED",
+        defaultIconColor: "#7077FF",
     },
 };
 
@@ -162,7 +172,7 @@ export const PROJECTS = {
             TECHNOLOGIES["Tailwind CSS"],
             TECHNOLOGIES["TypeScript"],
             TECHNOLOGIES["Drizzle ORM"],
-            TECHNOLOGIES["Zustand"],
+            TECHNOLOGIES["MongoDB"],
             TECHNOLOGIES["Git"],
         ],
     },
@@ -187,3 +197,57 @@ export const PROJECTS = {
         ],
     },
 };
+
+export const ringConfigs = [
+    {
+        id: "ring-3",
+        zIndex: 3,
+        radius: 400,
+        duration: 60,
+        reversed: false,
+        items: [
+            FaDragon,
+            MdPets,
+            GiGooExplosion,
+            AiFillBug,
+            RiSunLine,
+            BiCycling,
+            TbZodiacScorpio,
+            LuMountain,
+            TiWeatherSnow,
+            CgGames,
+        ],
+    },
+    {
+        id: "ring-2",
+        zIndex: 2,
+        radius: 300,
+        duration: 60,
+        reversed: true,
+        items: [
+            FaAppleAlt,
+            MdBolt,
+            GiCrystalBars,
+            AiFillHeart,
+            RiEarthLine,
+            BiGhost,
+            TbHexagonLetterX,
+            LuShip,
+        ],
+    },
+    {
+        id: "ring-1",
+        zIndex: 1,
+        radius: 200,
+        duration: 60,
+        reversed: false,
+        items: [
+            FaBeer,
+            MdAlarm,
+            GiAbstract049,
+            AiOutlineCloud,
+            RiCameraLensLine,
+            BiRocket,
+        ],
+    },
+];

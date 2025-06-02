@@ -5,6 +5,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
 import { TECHNOLOGIES } from "@/lib/constants";
+import Heading from "@/components/ui/heading";
 
 const TechSection = () => {
     useGSAP(() => {
@@ -38,10 +39,10 @@ const TechSection = () => {
 
     return (
         <section className="mx-auto max-w-[90svw] py-32">
-            <h2 className="mb-8 text-3xl">
+            <Heading>
                 Some <span className="text-primary">Skills</span> &{" "}
                 <span className="text-primary">Technologies</span>
-            </h2>
+            </Heading>
             <style jsx>{`
                 #cards:hover > .card > .card-border {
                     opacity: 1;
@@ -56,7 +57,7 @@ const TechSection = () => {
                     TECHNOLOGIES["Next.js"],
                     TECHNOLOGIES["Tailwind CSS"],
                     TECHNOLOGIES["Express"],
-                    TECHNOLOGIES["Zustand"],
+                    TECHNOLOGIES["MongoDB"],
                     TECHNOLOGIES["Drizzle ORM"],
                     TECHNOLOGIES["Git"],
                     TECHNOLOGIES["Docker"],

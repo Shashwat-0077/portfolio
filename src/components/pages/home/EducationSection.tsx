@@ -1,5 +1,7 @@
 import React from "react";
 
+import Heading from "@/components/ui/heading";
+
 const Circle = () => {
     return (
         <div className="w-hull z-10 grid h-full place-content-center">
@@ -83,9 +85,7 @@ const MasterContent = () => {
 const EducationSection = () => {
     return (
         <section className="py-32">
-            <h2 className="mb-8 text-3xl font-bold tracking-tight">
-                Education
-            </h2>
+            <Heading>Education</Heading>
             <div className="relative grid grid-cols-[1fr_70px_1fr] gap-y-40">
                 <div className="bar bg-primary/10 absolute top-[6%] bottom-[6%] left-1/2 w-2 -translate-x-1/2">
                     &nbsp;

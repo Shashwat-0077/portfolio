@@ -112,6 +112,7 @@ const Preloader = () => {
     const prefetcherRef = useRef<RoutePrefetcher | null>(null);
 
     const greetings = [
+        "hello", // English
         "नमस्कार", // Marathi, Nepali, Konkani, Maithili, Bengali, Assamese, Odia, Gujarati
         "नमः", // Sanskrit
         "வணக்கம்", // Tamil

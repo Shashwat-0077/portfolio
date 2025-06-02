@@ -171,7 +171,7 @@ const ProjectCard = ({
                     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
                 }
                 .card-content {
-                    backdrop-filter: blur(10px);
+                    backdrop-filter: blur(5px);
                     background-color: rgba(0, 0, 0, 0.2);
                     color: white;
                 }
@@ -227,19 +227,14 @@ const ProjectCard = ({
                             className="tech top-0 flex w-full items-center justify-start gap-3"
                             ref={techContainerRef}
                         >
-                            {technologies
-                                .slice(0, 4)
-                                .map(({ Icon, title, defaultIconColor }) => (
-                                    <div
-                                        key={title}
-                                        className="rounded-full bg-white p-2"
-                                    >
-                                        <Icon
-                                            size={24}
-                                            color={defaultIconColor}
-                                        />
-                                    </div>
-                                ))}
+                            {technologies.slice(0, 4).map(({ Icon, title }) => (
+                                <div
+                                    key={title}
+                                    className="rounded-full bg-white p-2"
+                                >
+                                    <Icon size={24} color="#000000" />
+                                </div>
+                            ))}
 
                             {technologies.length > 4 && (
                                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white p-2 text-sm font-medium text-black">
