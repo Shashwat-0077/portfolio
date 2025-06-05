@@ -49,12 +49,12 @@ const TransitionLink = ({
         }
 
         const dock = document.querySelector("[data-dock]") as HTMLDivElement;
+        const dockLid = document.querySelector(
+            "[data-dock-lid]"
+        ) as HTMLDivElement;
         const inactiveLinks = Array.from(
             dock.querySelectorAll(`.dock-link.inactive`)
         ) as HTMLElement[];
-        const dockContainer = document.querySelector(
-            "[data-dock-container]"
-        ) as HTMLDivElement;
 
         const hasViewTransitionSupport = BROWSER_SUPPORT.hasViewTransitions();
 
@@ -70,13 +70,13 @@ const TransitionLink = ({
             if (
                 hasViewTransitionSupport &&
                 dock &&
-                dockContainer &&
-                inactiveLinks.length > 0
+                inactiveLinks.length > 0 &&
+                dockLid
             ) {
                 await DockAnimations.animateOut({
                     dock,
                     inactiveLinks,
-                    dockContainer,
+                    dockLid,
                 });
                 router.push(path, {
                     onTransitionReady: PageAnimations.slideInAndOut,
@@ -90,12 +90,10 @@ const TransitionLink = ({
             }
         } catch (_error) {
             // Reset dock state on error
-            if (dock && hasViewTransitionSupport && dockContainer) {
-                dockContainer.style.pointerEvents = "auto";
+            if (dock && hasViewTransitionSupport) {
+                dock.style.pointerEvents = "auto";
             }
         } finally {
-            // Reset all states
-            setDockAnimating(false);
             setCursorDisabled(false);
             setTransitioning(false);
         }

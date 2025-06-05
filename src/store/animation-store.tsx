@@ -13,7 +13,7 @@ interface AnimationState {
 }
 
 export const useAnimationStore = create<AnimationState>((set) => ({
-    isDockAnimating: false,
+    isDockAnimating: true,
     isCursorDisabled: false,
     isTransitioning: false,
     setCursorDisabled: (disabled) => set({ isCursorDisabled: disabled }),

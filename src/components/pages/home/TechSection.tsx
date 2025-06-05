@@ -1,11 +1,11 @@
 "use client";
 
+import gsap from "gsap";
 import { MoveRight } from "lucide-react";
 import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
 
-import { TECHNOLOGIES } from "@/lib/constants";
 import Heading from "@/components/ui/heading";
+import { TECHNOLOGIES } from "@/data/technologies";
 
 const TechSection = () => {
     useGSAP(() => {
@@ -38,10 +38,9 @@ const TechSection = () => {
     });
 
     return (
-        <section className="mx-auto max-w-[90svw] py-32">
+        <section className="container mx-auto py-32">
             <Heading>
-                Some <span className="text-primary">Skills</span> &{" "}
-                <span className="text-primary">Technologies</span>
+                My <span className="text-primary">Learnings</span>
             </Heading>
             <style jsx>{`
                 #cards:hover > .card > .card-border {
@@ -55,10 +54,10 @@ const TechSection = () => {
                 {[
                     TECHNOLOGIES["TypeScript"],
                     TECHNOLOGIES["Next.js"],
-                    TECHNOLOGIES["Tailwind CSS"],
+                    TECHNOLOGIES["Tailwind"],
                     TECHNOLOGIES["Express"],
                     TECHNOLOGIES["MongoDB"],
-                    TECHNOLOGIES["Drizzle ORM"],
+                    TECHNOLOGIES["Drizzle"],
                     TECHNOLOGIES["Git"],
                     TECHNOLOGIES["Docker"],
                 ].map(({ description, title, Icon, defaultIconColor }) => {

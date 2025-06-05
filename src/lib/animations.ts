@@ -1,68 +1,65 @@
-import gsap from "gsap";
+"use client";
 
-const DOCK_BOX_SHADOW_ACTIVE = "rgba(0, 0, 0, 0.45) 0px 10px 20px -10px";
-const DOCK_BOX_SHADOW_INACTIVE = "rgba(0, 0, 0, 0) 0px 0px 0px 0px";
+import gsap from "gsap";
 
 export const DockAnimations = {
     animateIn: async ({
         dock,
         inactiveLinks,
-        dockContainer,
+        dockLid,
+        onComplete = () => {},
     }: {
         dock: HTMLDivElement;
-        inactiveLinks: HTMLElement[];
-        dockContainer: HTMLDivElement;
-    }) => {
+        inactiveLinks: HTMLDivElement[];
+        dockLid: HTMLDivElement;
+        onComplete?: () => void;
+    }): Promise<void> => {
         return new Promise((resolve) => {
-            const tl = gsap.timeline();
-
-            gsap.set(dockContainer, {
-                y: 10,
-                boxShadow: DOCK_BOX_SHADOW_INACTIVE,
+            const tl = gsap.timeline({
+                onComplete: () => {
+                    onComplete();
+                    resolve();
+                },
             });
 
             gsap.set(dock, {
-                opacity: 0.5,
                 padding: 0,
+                y: 10,
             });
 
             gsap.set(inactiveLinks, {
                 width: 0,
             });
-
-            tl.to(dockContainer, {
+            tl.to(dock, {
                 y: 0,
+                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
                 duration: 0.3,
                 ease: "power2.out",
                 delay: 1.5,
-                boxShadow: DOCK_BOX_SHADOW_ACTIVE,
             })
+                .to(dockLid, {
+                    opacity: 0,
+                    duration: 0.3,
+                    ease: "power2.inOut",
+                    onComplete: () => {
+                        dockLid.style.zIndex = "-1"; // Hide the lid after animation
+                    },
+                })
                 .to(
                     dock,
                     {
-                        opacity: 1,
+                        padding: "0 1.75rem",
                         duration: 0.3,
                         ease: "power2.inOut",
                     },
                     "<"
                 )
-                .to(dock, {
-                    padding: "0 1.75rem",
-                    duration: 0.3,
-                    ease: "power2.inOut",
-                })
                 .to(
                     inactiveLinks,
                     {
                         width: "3rem",
                         duration: 0.3,
                         ease: "back.out(1.7)",
-                        onComplete: () => {
-                            dockContainer.style.pointerEvents = "auto";
-                            resolve({
-                                done: true,
-                            });
-                        },
                     },
                     "<0.2"
                 );
@@ -71,22 +68,41 @@ export const DockAnimations = {
     animateOut: ({
         dock,
         inactiveLinks,
-        dockContainer,
+        dockLid,
+        onComplete = () => {},
     }: {
-        dock: HTMLDivElement;
+        dock: HTMLElement;
         inactiveLinks: HTMLElement[];
-        dockContainer: HTMLDivElement;
+        dockLid: HTMLElement;
+        onComplete?: () => void;
     }): Promise<void> => {
-        dockContainer.style.pointerEvents = "none";
-
         return new Promise((resolve) => {
-            const tl = gsap.timeline();
+            gsap.set(dockLid, {
+                opacity: 0,
+                zIndex: 10,
+            });
+
+            const tl = gsap.timeline({
+                onComplete: () => {
+                    onComplete();
+                    resolve();
+                },
+            });
 
             tl.to(inactiveLinks, {
                 width: 0,
                 duration: 0.3,
                 ease: "power2.out",
             })
+                .to(
+                    dockLid,
+                    {
+                        opacity: 0.5,
+                        duration: 0.3,
+                        ease: "power2.inOut",
+                    },
+                    "<"
+                )
                 .to(
                     dock,
                     {
@@ -97,23 +113,75 @@ export const DockAnimations = {
                     "<"
                 )
                 .to(dock, {
-                    opacity: 0.5,
+                    y: 10,
                     duration: 0.3,
                     fill: "forwards",
                     ease: "power2.inOut",
-                })
-                .to(
-                    dockContainer,
-                    {
-                        y: 10,
-                        fill: "forwards",
-                        duration: 0.3,
-                        ease: "power2.inOut",
-                        boxShadow: DOCK_BOX_SHADOW_INACTIVE,
-                        onComplete: resolve,
-                    },
-                    "<"
-                );
+                });
+        });
+    },
+    collapse: ({
+        dock,
+        inactiveLinks,
+        onComplete = () => {},
+    }: {
+        dock: HTMLDivElement;
+        inactiveLinks: HTMLDivElement[];
+        onComplete?: () => void;
+    }): Promise<void> => {
+        return new Promise((resolve) => {
+            const tl = gsap.timeline({
+                onComplete: () => {
+                    onComplete();
+                    resolve();
+                },
+            });
+
+            tl.to(inactiveLinks, {
+                width: 0,
+                duration: 0.3,
+                ease: "power2.out",
+            }).to(
+                dock,
+                {
+                    padding: 0,
+                    duration: 0.3,
+                    ease: "power2.inOut",
+                },
+                "<"
+            );
+        });
+    },
+    expand: ({
+        dock,
+        inactiveLinks,
+        onComplete = () => {},
+    }: {
+        dock: HTMLDivElement;
+        inactiveLinks: HTMLDivElement[];
+        onComplete?: () => void;
+    }): Promise<void> => {
+        return new Promise((resolve) => {
+            const tl = gsap.timeline({
+                onComplete: () => {
+                    onComplete();
+                    resolve();
+                },
+            });
+
+            tl.to(dock, {
+                padding: "0 1.75rem",
+                duration: 0.3,
+                ease: "power2.inOut",
+            }).to(
+                inactiveLinks,
+                {
+                    width: "3rem",
+                    duration: 0.3,
+                    ease: "back.out(1.7)",
+                },
+                "<0.2"
+            );
         });
     },
 };
@@ -176,6 +244,7 @@ export const PreloaderAnimations = {
 
         const tl = gsap.timeline({
             onComplete: () => {
+                preloader.remove();
                 setHasShown(true);
             },
         });

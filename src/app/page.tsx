@@ -7,12 +7,8 @@ import EducationSection from "@/components/pages/home/EducationSection";
 export default function HomePage() {
     return (
         <main className="bg-background relative min-h-screen">
-            {/* <div
-                className="pointer-events-none absolute inset-0 bg-[url('/background-2.jpg')] bg-cover bg-center opacity-10 brightness-20"
-                aria-hidden="true"
-            ></div> */}
             <Dock />
-            <div className="container mx-auto">
+            <div>
                 {/* Hero Section */}
                 <HeroSection />
                 {/* Tech section */}

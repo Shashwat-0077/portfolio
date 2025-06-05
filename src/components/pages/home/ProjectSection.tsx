@@ -3,12 +3,12 @@ import React from "react";
 import { MoveRight } from "lucide-react";
 
 import ProjectCard from "@/components/ui/project-card";
-import { PROJECTS } from "@/lib/constants";
 import Heading from "@/components/ui/heading";
+import { PROJECTS } from "@/data/projects";
 
 const ProjectSection = () => {
     return (
-        <section className="mx-auto max-w-[90svw] py-52">
+        <section className="container mx-auto py-52">
             <Heading>Projects</Heading>
             <div className="grid grid-cols-1 gap-10 xl:grid-cols-2">
                 {[

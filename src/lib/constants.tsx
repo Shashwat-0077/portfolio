@@ -1,25 +1,6 @@
 import { Hammer, Home, LayoutDashboard, Phone } from "lucide-react";
-import {
-    SiTypescript,
-    SiNextdotjs,
-    SiTailwindcss,
-    SiExpress,
-    SiDocker,
-    SiGit,
-    SiDrizzle,
-    SiMongodb,
-} from "react-icons/si";
-import { IconType } from "react-icons";
-import { FaAppleAlt, FaBeer, FaDragon } from "react-icons/fa";
-import { MdAlarm, MdBolt, MdPets } from "react-icons/md";
-import { GiAbstract049, GiCrystalBars, GiGooExplosion } from "react-icons/gi";
-import { AiFillBug, AiFillHeart, AiOutlineCloud } from "react-icons/ai";
-import { RiCameraLensLine, RiEarthLine, RiSunLine } from "react-icons/ri";
-import { BiCycling, BiGhost, BiRocket } from "react-icons/bi";
-import { TbHexagonLetterX, TbZodiacScorpio } from "react-icons/tb";
-import { LuMountain, LuShip } from "react-icons/lu";
-import { TiWeatherSnow } from "react-icons/ti";
-import { CgGames } from "react-icons/cg";
+
+import { TECHNOLOGIES } from "@/data/technologies";
 
 // Animation timing constants
 export const ANIMATION_CONSTANTS = {
@@ -82,140 +63,24 @@ export const ROUTES = [
 ];
 export const ROUTES_TO_PREFETCH = ROUTES.map(({ path }) => path);
 
-export type Technology = {
-    [key: string]: {
-        title: string;
-        description: string;
-        Icon: IconType | React.ComponentType<React.SVGProps<SVGSVGElement>>;
-        defaultIconColor: string;
-    };
-};
-
-export const TECHNOLOGIES = {
-    TypeScript: {
-        title: "TypeScript",
-        description: "Type safe JavaScript",
-        Icon: SiTypescript,
-        defaultIconColor: "#7077FF",
-    },
-    "Next.js": {
-        title: "Next.js",
-        description: "React framework for SSR & routing",
-        Icon: SiNextdotjs,
-        defaultIconColor: "#7077FF",
-    },
-    "Tailwind CSS": {
-        title: "Tailwind CSS",
-        description: "Utility-first CSS framework",
-        Icon: SiTailwindcss,
-        defaultIconColor: "#7077FF",
-    },
-    Express: {
-        title: "Express",
-        description: "Minimal Node.js web framework",
-        Icon: SiExpress,
-        defaultIconColor: "#7077FF",
-    },
-    MongoDB: {
-        title: "MongoDB",
-        description: "NoSQL database",
-        Icon: SiMongodb,
-        defaultIconColor: "#7077FF",
-    },
-    "Drizzle ORM": {
-        title: "Drizzle ORM",
-        description: "Type-safe SQL ORM for TypeScript",
-        Icon: SiDrizzle,
-        defaultIconColor: "#7077FF",
-    },
-    Git: {
-        title: "Git",
-        description: "Version control system",
-        Icon: SiGit,
-        defaultIconColor: "#7077FF",
-    },
-    Docker: {
-        title: "Docker",
-        description: "Containerization platform",
-        Icon: SiDocker,
-        defaultIconColor: "#7077FF",
-    },
-};
-
-export type Project = {
-    logoUrl: string;
-    backgroundImageUrl: string;
-    title: string;
-    description: string;
-    liveLink: string;
-    githubLink: string;
-    foreGroundColor: string;
-    primaryColor: string;
-    textColor: string;
-    technologies: Technology[keyof Technology][];
-};
-
-export const PROJECTS = {
-    Momentum: {
-        logoUrl: "/projects/Momentum/logo.svg",
-        backgroundImageUrl: "/projects/Momentum/background.png",
-        title: "Momentum",
-        description:
-            "Momentum is a powerful web app that helps you track, visualize, and manage your data effortlessly. With seamless Notion integration, you can sync and analyze your Notion databases alongside your personal data. Momentum features interactive charts for deep insights, a habit tracker with vibrant heat-maps to monitor your progress, and a clean, intuitive interface to keep you organized and motivated every step of the way",
-        liveLink: "https://momentum-pied.vercel.app/",
-        githubLink: "https://github.com/Shashwat-0077/momentum",
-        foreGroundColor: "#ffffff",
-        primaryColor: "#F2545B",
-        textColor: "#ffffff",
-        technologies: [
-            TECHNOLOGIES["Next.js"],
-            TECHNOLOGIES["Tailwind CSS"],
-            TECHNOLOGIES["TypeScript"],
-            TECHNOLOGIES["Drizzle ORM"],
-            TECHNOLOGIES["MongoDB"],
-            TECHNOLOGIES["Git"],
-        ],
-    },
-    "Virtual Doc": {
-        logoUrl: "/projects/VirtualDoc/logo.svg",
-        backgroundImageUrl: "/projects/VirtualDoc/background.png",
-        title: "Virtual Doc",
-        description:
-            "Connect with doctors instantly, book appointments with ease, and consult via secure video calls — all in one place. Built with a powerful tech stack: real-time communication using Socket.IO and WebRTC, a seamless interface powered by Next.js, a robust backend with Express and MongoDB, and secure login through Google Authentication. Your care, re-imagined.",
-        liveLink: "",
-        githubLink:
-            "https://github.com/Shashwat-0077/online-medical-consultation",
-        foreGroundColor: "#000000",
-        primaryColor: "#16ccbd",
-        textColor: "#000000",
-        technologies: [
-            TECHNOLOGIES["Next.js"],
-            TECHNOLOGIES["Tailwind CSS"],
-            TECHNOLOGIES["TypeScript"],
-            TECHNOLOGIES["Git"],
-            TECHNOLOGIES["Express"],
-        ],
-    },
-};
-
 export const ringConfigs = [
     {
         id: "ring-3",
         zIndex: 3,
-        radius: 400,
+        radius: 450,
         duration: 60,
         reversed: false,
         items: [
-            FaDragon,
-            MdPets,
-            GiGooExplosion,
-            AiFillBug,
-            RiSunLine,
-            BiCycling,
-            TbZodiacScorpio,
-            LuMountain,
-            TiWeatherSnow,
-            CgGames,
+            TECHNOLOGIES["TypeScript"].Icon,
+            TECHNOLOGIES["Next.js"].Icon,
+            TECHNOLOGIES["Tailwind"].Icon,
+            TECHNOLOGIES["Express"].Icon,
+            TECHNOLOGIES["MongoDB"].Icon,
+            TECHNOLOGIES["Drizzle"].Icon,
+            TECHNOLOGIES["Git"].Icon,
+            TECHNOLOGIES["Docker"].Icon,
+            TECHNOLOGIES["Python"].Icon,
+            TECHNOLOGIES["React"].Icon,
         ],
     },
     {
@@ -225,29 +90,29 @@ export const ringConfigs = [
         duration: 60,
         reversed: true,
         items: [
-            FaAppleAlt,
-            MdBolt,
-            GiCrystalBars,
-            AiFillHeart,
-            RiEarthLine,
-            BiGhost,
-            TbHexagonLetterX,
-            LuShip,
+            TECHNOLOGIES["Node.js"].Icon,
+            TECHNOLOGIES["SQL"].Icon,
+            TECHNOLOGIES["Redis"].Icon,
+            TECHNOLOGIES["GraphQL"].Icon,
+            TECHNOLOGIES["PostgreSQL"].Icon,
+            TECHNOLOGIES["Firebase"].Icon,
+            TECHNOLOGIES["AWS"].Icon,
+            TECHNOLOGIES["Keras"].Icon,
         ],
     },
     {
         id: "ring-1",
         zIndex: 1,
-        radius: 200,
+        radius: 150,
         duration: 60,
         reversed: false,
         items: [
-            FaBeer,
-            MdAlarm,
-            GiAbstract049,
-            AiOutlineCloud,
-            RiCameraLensLine,
-            BiRocket,
+            TECHNOLOGIES["TensorFlow"].Icon,
+            TECHNOLOGIES["PyTorch"].Icon,
+            TECHNOLOGIES["scikit-learn"].Icon,
+            TECHNOLOGIES["OpenCV"].Icon,
+            TECHNOLOGIES["Flask"].Icon,
+            TECHNOLOGIES["Linux"].Icon,
         ],
     },
 ];

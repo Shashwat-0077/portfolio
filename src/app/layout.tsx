@@ -7,6 +7,7 @@ import ReactLenis from "@studio-freight/react-lenis";
 
 import CursorAnimation from "@/components/ui/cursor-animation";
 import Preloader from "@/components/preloader";
+import Footer from "@/components/footer";
 
 export default function RootLayout({
     children,
@@ -48,11 +49,12 @@ export default function RootLayout({
         <ViewTransitions>
             <html lang="en">
                 <body>
-                    {/* <Preloader /> */}
+                    <Preloader />
                     <CursorAnimation />
                     <ReactLenis root>
                         <div>{children}</div>
                     </ReactLenis>
+                    <Footer />
                 </body>
             </html>
         </ViewTransitions>

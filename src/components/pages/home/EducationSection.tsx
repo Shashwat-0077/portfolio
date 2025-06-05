@@ -84,7 +84,7 @@ const MasterContent = () => {
 
 const EducationSection = () => {
     return (
-        <section className="py-32">
+        <section className="container mx-auto py-32">
             <Heading>Education</Heading>
             <div className="relative grid grid-cols-[1fr_70px_1fr] gap-y-40">
                 <div className="bar bg-primary/10 absolute top-[6%] bottom-[6%] left-1/2 w-2 -translate-x-1/2">

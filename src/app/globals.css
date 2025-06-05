@@ -2,9 +2,10 @@
 @import "tw-animate-css";
 
 
+
 @font-face {
     font-family: "Jersey10";
-    src: url("/fonts/Jersey10-Regular.ttf") format("truetype");
+    src: url("/fonts/jersey/Jersey10-Regular.ttf") format("truetype");
     font-weight: 400;
     font-style: normal;
     font-display: swap;
@@ -12,17 +13,17 @@
 
 @font-face {
     font-family: "Garet";
-    src: url("/fonts/Garet-Book.woff") format("woff");
-    font-weight: 400;
+    src: url("/fonts/Chivo/Chivo-VariableFont_wght.ttf") format("truetype");
+    font-family: "Chivo", cursive;
+    font-weight: 100 200 300 400 500 600 700 800 900;
     font-style: normal;
-    font-display: swap;
 }
 
 
 :root {
     --jersey-font: "Jersey10", sans-serif;
     --garet-font: "Garet", sans-serif;
-    --background: #242424;
+    --background: #171717;
     --foreground: #fafafa;
     --card: #0a0a0a;
     --card-foreground: #fafafa;
@@ -135,6 +136,8 @@
 
     /* For Webkit Browsers (Chrome, Safari, Edge) */
     ::-webkit-scrollbar {
+        display: none;
+
         width: 8px;
         /* Width of the scrollbar */
         height: 8px;
@@ -143,12 +146,14 @@
 
     ::-webkit-scrollbar-track {
         background: var(--background);
+        display: none;
         /* Track color */
         border-radius: 10px;
     }
 
     ::-webkit-scrollbar-thumb {
         background: var(--muted);
+        display: none;
         /* Scrollbar color */
         border-radius: 10px;
     }

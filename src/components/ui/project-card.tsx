@@ -6,8 +6,9 @@ import { Observer } from "gsap/all";
 import Image from "next/image";
 import React from "react";
 
-import { Project } from "@/lib/constants";
+import { Project } from "@/data/projects";
 import { cn } from "@/lib/utils";
+import { TECHNOLOGIES } from "@/data/technologies";
 
 gsap.registerPlugin(Observer);
 
@@ -22,7 +23,7 @@ const ProjectCard = ({
     foreGroundColor,
     textColor,
     primaryColor,
-}: Project) => {
+}: Project[keyof Project]) => {
     const cardRed = React.useRef<HTMLDivElement>(null);
     const logoRef = React.useRef<HTMLDivElement>(null);
     const textContentRef = React.useRef<HTMLDivElement>(null);
@@ -227,14 +228,22 @@ const ProjectCard = ({
                             className="tech top-0 flex w-full items-center justify-start gap-3"
                             ref={techContainerRef}
                         >
-                            {technologies.slice(0, 4).map(({ Icon, title }) => (
-                                <div
-                                    key={title}
-                                    className="rounded-full bg-white p-2"
-                                >
-                                    <Icon size={24} color="#000000" />
-                                </div>
-                            ))}
+                            {technologies.map((val) => {
+                                const { Icon, title } = TECHNOLOGIES[val];
+
+                                return (
+                                    <div
+                                        key={title}
+                                        className="rounded-full bg-white p-2"
+                                    >
+                                        {Icon ? (
+                                            <Icon size={24} color="#000000" />
+                                        ) : (
+                                            <div className="h-6 w-6 animate-pulse rounded-full bg-gray-200" />
+                                        )}
+                                    </div>
+                                );
+                            })}
 
                             {technologies.length > 4 && (
                                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white p-2 text-sm font-medium text-black">

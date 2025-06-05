@@ -1,9 +1,9 @@
 "use client";
+import Image from "next/image";
 import { IconType } from "react-icons";
-import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { Observer } from "gsap/Observer";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 
 import { ringConfigs } from "@/lib/constants";
 
@@ -51,7 +51,7 @@ const Ring = ({
 
     const angleStep = (2 * Math.PI) / items.length;
 
-    useGSAP(() => {
+    useEffect(() => {
         const rotationObj = { rotation: reversed ? 360 : 0 };
 
         // Create the rotation tween
@@ -135,7 +135,7 @@ const Ring = ({
                     className="relative h-full w-full rounded-full"
                     id={`${id}-items`}
                     style={{
-                        zIndex: 9999,
+                        zIndex: 1,
                     }}
                 >
                     {items.map((Item, i) => {
@@ -151,7 +151,7 @@ const Ring = ({
                             circleRadius * Math.sin(angle) -
                             height / 2;
 
-                        return (
+                        return Item ? (
                             <Item
                                 key={i}
                                 id={`${id}-item-${i}`}
@@ -161,8 +161,26 @@ const Ring = ({
                                     top: `${itemY}px`,
                                     width: `${width}px`,
                                     height: `${height}px`,
+                                    zIndex: 1,
                                 }}
                             />
+                        ) : (
+                            <div
+                                key={i}
+                                id={`${id}-item-${i}`}
+                                className="bg-background absolute"
+                                style={{
+                                    left: `${itemX}px`,
+                                    top: `${itemY}px`,
+                                    width: `${width}px`,
+                                    height: `${height}px`,
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                }}
+                            >
+                                <span className="text-gray-500">null</span>
+                            </div>
                         );
                     })}
                 </div>
@@ -170,18 +188,51 @@ const Ring = ({
         </>
     );
 };
-
 const Galaxy = () => {
-    const iconSize = 30; // Default icon size for all rings
+    const iconSize = 38;
+    const size = 1400;
+    const avatarSize = 60;
 
     return (
-        <div className="fixed top-0 left-1/2 -translate-1/2">
+        <div
+            className="absolute 2xl:z-10"
+            style={{
+                width: `${size}px`, // Fixed visual width
+                height: `${size}px`,
+                right: "-425px",
+                top: "-425px",
+                flexShrink: 0, // Prevent shrinking on small screens
+            }}
+        >
             <svg
-                width={1500}
-                height={1500}
+                width={size}
+                height={size}
                 viewBox="0 0 1000 1000"
+                preserveAspectRatio="xMidYMid meet"
                 xmlns="http://www.w3.org/2000/svg"
             >
+                <foreignObject
+                    x="50%"
+                    y="50%"
+                    width={`${avatarSize}px`}
+                    height={`${avatarSize}px`}
+                    style={{
+                        transform: `translate(-${avatarSize / 2}px, -${avatarSize / 2}px)`,
+                        zIndex: 1,
+                    }}
+                >
+                    <div className="rounded-full border-[2px] p-1">
+                        <div className="bg-primary overflow-hidden rounded-full">
+                            <Image
+                                priority
+                                src="/Avatar.png"
+                                alt="Avatar"
+                                width={avatarSize}
+                                height={avatarSize}
+                            />
+                        </div>
+                    </div>
+                </foreignObject>
                 {ringConfigs.map((config) => (
                     <Ring
                         key={config.id}

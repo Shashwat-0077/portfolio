@@ -13,6 +13,7 @@
     "dependencies": {
         "@gsap/react": "^2.1.2",
         "@radix-ui/react-slot": "^1.2.3",
+        "@radix-ui/react-tabs": "^1.1.12",
         "@radix-ui/react-tooltip": "^1.2.7",
         "@studio-freight/react-lenis": "^0.0.47",
         "class-variance-authority": "^0.7.1",
@@ -27,6 +28,7 @@
         "react-icons": "^5.5.0",
         "react-use": "^17.6.0",
         "tailwind-merge": "^3.3.0",
+        "throttle-debounce": "^5.0.2",
         "zustand": "^5.0.5"
     },
     "devDependencies": {
@@ -35,6 +37,7 @@
         "@types/node": "^20",
         "@types/react": "^18",
         "@types/react-dom": "^18",
+        "@types/throttle-debounce": "^5.0.2",
         "eslint": "^9",
         "eslint-config-next": "15.3.2",
         "tailwindcss": "^4",

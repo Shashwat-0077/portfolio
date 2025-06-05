@@ -1,14 +1,35 @@
 import Dock from "@/components/ui/dock";
-import Galaxy from "@/components/pages/skills/galaxy";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { TECHNOLOGIES } from "@/data/technologies";
+import TechCards from "@/components/ui/tech-cards";
 
 export default function SkillsPage() {
+    const allTechs = Object.keys(TECHNOLOGIES) as (keyof typeof TECHNOLOGIES)[];
+
     return (
-        <>
-            {/* NOTE : For the galaxy use GSAP motion path plugin */}
-            <div className="bg-background flex min-h-screen flex-col items-center justify-center text-white">
+        <div className="bg-background font-garet font-light">
+            <div className="bg-background container mx-auto min-h-screen text-white">
                 <Dock />
-                <Galaxy />
+
+                <h1 className="font-garet py-20 text-center text-9xl font-bold">
+                    Skills
+                </h1>
+
+                <Tabs defaultValue="all">
+                    <TabsList className="mb-6">
+                        <TabsTrigger value="all" className="w-1/6">
+                            All
+                        </TabsTrigger>
+                        <TabsTrigger value="languages" className="w-1/6">
+                            Languages
+                        </TabsTrigger>
+                    </TabsList>
+
+                    <TabsContent value="all">
+                        <TechCards techs={allTechs} />
+                    </TabsContent>
+                </Tabs>
             </div>
-        </>
+        </div>
     );
 }

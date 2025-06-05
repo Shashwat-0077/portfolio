@@ -1,5 +1,7 @@
 import Dock from "@/components/ui/dock";
 
+// TODO : add satellite
+
 export default function ContactPage() {
     return (
         <>
