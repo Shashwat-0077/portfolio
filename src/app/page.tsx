@@ -1,8 +1,38 @@
+import { Metadata } from "next";
+
 import Dock from "@/components/ui/dock";
 import HeroSection from "@/components/pages/home/HeroSection";
 import TechSection from "@/components/pages/home/TechSection";
 import ProjectSection from "@/components/pages/home/ProjectSection";
 import EducationSection from "@/components/pages/home/EducationSection";
+
+export const metadata: Metadata = {
+    title: "Shashwat Gupta",
+    description: "Coding beyond the stars — Portfolio of Shashwat Gupta.",
+    openGraph: {
+        title: "Shashwat Gupta",
+        description:
+            "Explore the cosmic codebase of a developer building digital galaxies.",
+        url: "https://www.shashwatgupta.me",
+        siteName: "Shashwat Gupta Portfolio",
+        images: [
+            {
+                url: "https://yourdomain.com/logo.svg",
+                width: 1200,
+                height: 630,
+                alt: "Shashwat Gupta",
+            },
+        ],
+        type: "website",
+    },
+    // twitter: {
+    //     card: "summary_large_image",
+    //     title: "Shashwat Gupta",
+    //     description:
+    //         "Explore the cosmic codebase of a developer building digital galaxies.",
+    //     images: ["https://yourdomain.com/preview-image.jpg"],
+    // },
+};
 
 export default function HomePage() {
     return (
