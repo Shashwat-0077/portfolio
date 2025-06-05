@@ -18,8 +18,8 @@ export const metadata: Metadata = {
         images: [
             {
                 url: "https://www.shashwatgupta.me/logo.png",
-                width: 1200,
-                height: 630,
+                width: 1000,
+                height: 927,
                 alt: "Shashwat Gupta",
             },
         ],
