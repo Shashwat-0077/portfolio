@@ -13,11 +13,11 @@ export const metadata: Metadata = {
         title: "Shashwat Gupta",
         description:
             "Explore the cosmic codebase of a developer building digital galaxies.",
-        url: "https://www.shashwatgupta.me",
+        url: "https://www.shashwatgupta.me/",
         siteName: "Shashwat Gupta Portfolio",
         images: [
             {
-                url: "https://yourdomain.com/logo.svg",
+                url: "https://www.shashwatgupta.me/logo.png",
                 width: 1200,
                 height: 630,
                 alt: "Shashwat Gupta",
