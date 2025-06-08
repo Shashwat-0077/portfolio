@@ -13,7 +13,9 @@ const CursorAnimation = () => {
 
     useEffect(() => {
         // Don't initialize cursor animation during preloader
-        if (isLoading) {return;}
+        if (isLoading) {
+            return;
+        }
 
         // Inject keyframes into the document only once
         const styleId = "click-rays-style";

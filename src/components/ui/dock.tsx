@@ -25,12 +25,11 @@ const Dock = () => {
     const dockLidRef = useRef<HTMLDivElement>(null);
     const isPreloaderLoading = usePreloaderStore((s) => s.isLoading);
     const { isDockAnimating, setDockAnimating } = useAnimationStore();
+    const pathname = usePathname();
 
     const isIdle = useIdle(5000, {
         enabled: !isDockAnimating,
     });
-
-    const pathname = usePathname();
 
     useEffect(() => {
         if (isDockAnimating || !dockRef.current) {
@@ -102,7 +101,7 @@ const Dock = () => {
         <div
             data-dock
             ref={dockRef}
-            className="border-border fixed top-6 left-1/2 z-50 flex -translate-x-1/2 items-center justify-center overflow-hidden rounded-full border-[2px] bg-white/5 px-7 backdrop-blur-lg"
+            className="border-border fixed top-6 left-1/2 z-50 flex items-center justify-center overflow-hidden rounded-full border-[2px] bg-white/5 backdrop-blur-lg"
         >
             <div
                 data-dock-lid

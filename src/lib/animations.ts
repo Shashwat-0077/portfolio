@@ -23,6 +23,7 @@ export const DockAnimations = {
             });
 
             gsap.set(dock, {
+                x: "-50%",
                 padding: 0,
                 y: 10,
             });
@@ -115,7 +116,6 @@ export const DockAnimations = {
                 .to(dock, {
                     y: 10,
                     duration: 0.3,
-                    fill: "forwards",
                     ease: "power2.inOut",
                 });
         });
