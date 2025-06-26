@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 
-import Dock from "@/components/ui/dock";
 import HeroSection from "@/components/pages/home/HeroSection";
 import TechSection from "@/components/pages/home/TechSection";
 import ProjectSection from "@/components/pages/home/ProjectSection";
@@ -37,7 +36,6 @@ export const metadata: Metadata = {
 export default function HomePage() {
     return (
         <main className="bg-background relative min-h-screen">
-            <Dock />
             <div>
                 {/* Hero Section */}
                 <HeroSection />

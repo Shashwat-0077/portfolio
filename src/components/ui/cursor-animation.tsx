@@ -9,11 +9,10 @@ import { ANIMATION_CONSTANTS } from "@/lib/constants";
 const CursorAnimation = () => {
     const { isCursorDisabled, isDockAnimating, isTransitioning } =
         useAnimationStore();
-    const { isLoading } = usePreloaderStore();
+    const { hasShown } = usePreloaderStore();
 
     useEffect(() => {
-        // Don't initialize cursor animation during preloader
-        if (isLoading) {
+        if (!hasShown) {
             return;
         }
 
@@ -114,9 +113,83 @@ const CursorAnimation = () => {
             document.removeEventListener("click", handleClick);
             clearExistingAnimations();
         };
-    }, [isCursorDisabled, isDockAnimating, isTransitioning, isLoading]);
+    }, [isCursorDisabled, isDockAnimating, isTransitioning, hasShown]);
 
     return null;
 };
 
-export default CursorAnimation;
+const CursorAnimationForNonCompatibleBrowsers = () => {
+    const { hasShown } = usePreloaderStore();
+
+    useEffect(() => {
+        if (!hasShown) {
+            return;
+        }
+
+        // Inject keyframes only once
+        const styleId = "click-rays-style";
+        if (!document.getElementById(styleId)) {
+            const style = document.createElement("style");
+            style.id = styleId;
+            style.textContent = `
+              @keyframes scaleDown {
+                0% { transform: scale(1); }
+                100% { transform: scale(0); }
+              }
+            `;
+            document.head.appendChild(style);
+        }
+
+        const handleClick = (e: MouseEvent) => {
+            const clickX = e.clientX - 2;
+            const clickY = e.clientY - 2;
+            const angles = [90, 135, 180, 225];
+
+            angles.forEach((angle) => {
+                const translateWrapper = document.createElement("div");
+                translateWrapper.setAttribute("data-cursor-animation", "true");
+                translateWrapper.style.cssText = `
+                  position: fixed;
+                  left: ${clickX}px;
+                  top: ${clickY}px;
+                  width: 4px;
+                  height: 10px;
+                  pointer-events: none;
+                  z-index: ${ANIMATION_CONSTANTS.CURSOR_ANIMATION_Z_INDEX};
+                  transform: rotate(${angle}deg) translateY(100%);
+                  transition: transform ${ANIMATION_CONSTANTS.CURSOR_CLEANUP_DELAY}ms ease-out;
+                `;
+
+                const scaleWrapper = document.createElement("div");
+                scaleWrapper.style.cssText = `
+                  width: 100%;
+                  height: 100%;
+                  background: white;
+                  animation: scaleDown ${ANIMATION_CONSTANTS.CURSOR_CLEANUP_DELAY}ms forwards ease-out;
+                `;
+
+                translateWrapper.appendChild(scaleWrapper);
+                document.body.appendChild(translateWrapper);
+
+                // Force layout flush for Firefox
+                translateWrapper.getBoundingClientRect();
+
+                requestAnimationFrame(() => {
+                    translateWrapper.style.transform = `rotate(${angle}deg) translateY(400%)`;
+                });
+
+                setTimeout(() => {
+                    if (document.body.contains(translateWrapper)) {
+                        document.body.removeChild(translateWrapper);
+                    }
+                }, ANIMATION_CONSTANTS.CURSOR_CLEANUP_DELAY);
+            });
+        };
+
+        window.addEventListener("click", handleClick);
+        return () => window.removeEventListener("click", handleClick);
+    }, [hasShown]);
+
+    return null;
+};
+export { CursorAnimation, CursorAnimationForNonCompatibleBrowsers };

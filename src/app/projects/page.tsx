@@ -1,12 +1,17 @@
-import Dock from "@/components/ui/dock";
+"use client";
+
+import { Dock, DockForNonCompatibleBrowsers } from "@/components/ui/dock";
 import { PROJECTS } from "@/data/projects";
 import ProjectCard from "@/components/ui/project-card";
+import { useAnimationStore } from "@/store/animation-store";
 
 export default function ProjectsPage() {
+    const { isCompatible } = useAnimationStore();
+
     return (
         <div className="bg-background">
             <div className="bg-background container mx-auto min-h-screen text-white">
-                <Dock />
+                {!isCompatible ? <DockForNonCompatibleBrowsers /> : <Dock />}
 
                 <h1 className="font-garet py-20 pt-40 text-center text-9xl">
                     Projects

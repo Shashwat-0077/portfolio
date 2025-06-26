@@ -5,6 +5,8 @@ import { useWindowSize } from "react-use";
 import { useTransitionRouter } from "next-view-transitions";
 import gsap from "gsap";
 
+import { usePreloaderStore } from "@/store/preloader-store";
+
 const ROUTES_TO_PREFETCH = ["/", "/skills", "/projects", "/contact"];
 
 const Preloader = () => {
@@ -17,8 +19,10 @@ const Preloader = () => {
     const progressBarRef = useRef<HTMLDivElement>(null);
 
     const [currentTextIndex, setCurrentTextIndex] = useState(0);
-    const [isComplete, setIsComplete] = useState(false);
+    const [isAnimatingOut, setIsAnimatingOut] = useState(false);
     const [isMounted, setIsMounted] = useState(false);
+
+    const { isComplete, setComplete } = usePreloaderStore();
 
     const greetings = [
         "hello",
@@ -42,7 +46,8 @@ const Preloader = () => {
     }, []);
 
     useEffect(() => {
-        if (isComplete || !isMounted) {
+        // Only show preloader on first visit
+        if (isComplete || !isMounted || isAnimatingOut) {
             return;
         }
 
@@ -52,10 +57,7 @@ const Preloader = () => {
                 await Promise.all(
                     ROUTES_TO_PREFETCH.map((route) => router.prefetch(route))
                 );
-            } catch (error) {
-                // eslint-disable-next-line no-console
-                console.warn("Failed to prefetch routes:", error);
-            }
+            } catch (_) {}
         };
 
         prefetchRoutes();
@@ -78,20 +80,21 @@ const Preloader = () => {
 
             if (currentIndex >= greetings.length) {
                 clearInterval(intervalId);
+                setIsAnimatingOut(true);
 
                 // Animate out
                 const tl = gsap.timeline({
                     onComplete: () => {
-                        setIsComplete(true);
-                        // Safer DOM removal
+                        // Signal that preloader is complete - this will trigger dock animation
+                        setComplete(true);
+
+                        // Safe DOM removal
                         if (preloaderRef.current) {
                             try {
-                                // Check if element still exists and has a parent
                                 if (
                                     document.body.contains(preloaderRef.current)
                                 ) {
                                     preloaderRef.current.style.display = "none";
-                                    // Use a small delay to ensure animations are complete
                                     setTimeout(() => {
                                         if (
                                             preloaderRef.current &&
@@ -104,6 +107,7 @@ const Preloader = () => {
                                     }, 100);
                                 }
                             } catch (error) {
+                                // eslint-disable-next-line no-console
                                 console.warn(
                                     "Error removing preloader:",
                                     error
@@ -138,8 +142,18 @@ const Preloader = () => {
         }, intervalTime);
 
         return () => clearInterval(intervalId);
-    }, [isComplete, isMounted, router, greetings.length, width, totalDuration]);
+    }, [
+        isComplete,
+        isMounted,
+        isAnimatingOut,
+        router,
+        greetings.length,
+        width,
+        totalDuration,
+        setComplete,
+    ]);
 
+    // Don't show preloader if it has already been shown
     if (isComplete || !isMounted) {
         return null;
     }

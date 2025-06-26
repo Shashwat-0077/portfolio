@@ -1,19 +1,32 @@
 "use client";
 
-import type React from "react";
+import { useEffect } from "react";
 import "./globals.css";
 import { ViewTransitions } from "next-view-transitions";
 import ReactLenis from "@studio-freight/react-lenis";
 
-import CursorAnimation from "@/components/ui/cursor-animation";
+import {
+    CursorAnimation,
+    CursorAnimationForNonCompatibleBrowsers,
+} from "@/components/ui/cursor-animation";
 import Preloader from "@/components/preloader";
 import Footer from "@/components/footer";
+import { useAnimationStore } from "@/store/animation-store";
+import { BROWSER_SUPPORT } from "@/lib/constants";
 
 export default function RootLayout({
     children,
 }: {
     children: React.ReactNode;
 }) {
+    const { isCompatible, setCompatible } = useAnimationStore();
+
+    useEffect(() => {
+        // Check if the browser supports the View Transition API
+        const supportsViewTransitions = BROWSER_SUPPORT.hasViewTransitions();
+        setCompatible(supportsViewTransitions);
+    }, [setCompatible]);
+
     // =======================
     // 📝 Notes on View Transition API
     // =======================
@@ -50,7 +63,13 @@ export default function RootLayout({
             <html lang="en">
                 <body>
                     <Preloader />
-                    <CursorAnimation />
+
+                    {!isCompatible ? (
+                        <CursorAnimationForNonCompatibleBrowsers />
+                    ) : (
+                        <CursorAnimation />
+                    )}
+
                     <ReactLenis root>
                         <div>{children}</div>
                     </ReactLenis>

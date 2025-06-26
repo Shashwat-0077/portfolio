@@ -3,15 +3,15 @@
 import { create } from "zustand";
 
 interface PreloaderState {
-    isLoading: boolean;
+    isComplete: boolean;
     hasShown: boolean;
-    setIsLoading: (loading: boolean) => void;
+    setComplete: (complete: boolean) => void;
     setHasShown: (shown: boolean) => void;
 }
 
 export const usePreloaderStore = create<PreloaderState>((set) => ({
-    isLoading: true,
+    isComplete: false,
     hasShown: false,
-    setIsLoading: (loading) => set({ isLoading: loading }),
+    setComplete: (complete) => set({ isComplete: complete }),
     setHasShown: (shown) => set({ hasShown: shown }),
 }));

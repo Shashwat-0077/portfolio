@@ -22,21 +22,12 @@ export const DockAnimations = {
                 },
             });
 
-            gsap.set(dock, {
-                x: "-50%",
-                padding: 0,
-                y: 10,
-            });
-
-            gsap.set(inactiveLinks, {
-                width: 0,
-            });
             tl.to(dock, {
                 y: 0,
                 boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
                 duration: 0.3,
                 ease: "power2.out",
-                delay: 1.5,
+                delay: 0.3, // Reduced delay since we handle timing externally
             })
                 .to(dockLid, {
                     opacity: 0,

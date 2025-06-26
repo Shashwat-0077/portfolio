@@ -32,11 +32,10 @@ export const ANIMATION_CONSTANTS = {
     PRELOADER_PROGRESS_DURATION: 4600, // ms - how long progress animation takes
 } as const;
 
-// Browser support detection
 export const BROWSER_SUPPORT = {
     hasViewTransitions: () =>
         typeof document !== "undefined" && "startViewTransition" in document,
-} as const;
+};
 
 // Routes (order matters)
 export const ROUTES = [
