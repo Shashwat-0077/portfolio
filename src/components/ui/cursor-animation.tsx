@@ -9,10 +9,10 @@ import { ANIMATION_CONSTANTS } from "@/lib/constants";
 const CursorAnimation = () => {
     const { isCursorDisabled, isDockAnimating, isTransitioning } =
         useAnimationStore();
-    const { hasShown } = usePreloaderStore();
+    const { isComplete } = usePreloaderStore();
 
     useEffect(() => {
-        if (!hasShown) {
+        if (!isComplete) {
             return;
         }
 
@@ -113,16 +113,18 @@ const CursorAnimation = () => {
             document.removeEventListener("click", handleClick);
             clearExistingAnimations();
         };
-    }, [isCursorDisabled, isDockAnimating, isTransitioning, hasShown]);
+    }, [isCursorDisabled, isDockAnimating, isTransitioning, isComplete]);
 
     return null;
 };
 
 const CursorAnimationForNonCompatibleBrowsers = () => {
-    const { hasShown } = usePreloaderStore();
+    const { isComplete } = usePreloaderStore();
+
+    console.log("CursorAnimationForNonCompatibleBrowsers rendered");
 
     useEffect(() => {
-        if (!hasShown) {
+        if (!isComplete) {
             return;
         }
 
@@ -188,7 +190,7 @@ const CursorAnimationForNonCompatibleBrowsers = () => {
 
         window.addEventListener("click", handleClick);
         return () => window.removeEventListener("click", handleClick);
-    }, [hasShown]);
+    }, [isComplete]);
 
     return null;
 };

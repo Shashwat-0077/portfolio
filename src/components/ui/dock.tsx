@@ -36,12 +36,6 @@ const Dock = () => {
     });
 
     useEffect(() => {
-        console.log({
-            isDockAnimating,
-        });
-    }, [isDockAnimating]);
-
-    useEffect(() => {
         if (!dockRef.current || !lidRef.current) {
             return;
         }
