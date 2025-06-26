@@ -18,10 +18,17 @@ import { useAnimationStore } from "@/store/animation-store";
 import TransitionLink from "@/components/transition-link";
 import { DockAnimations } from "@/lib/animations";
 import useIdle from "@/hooks/use-idle";
+import { useGlobalTimeout } from "@/store/ref-store";
+
+// BUG : Their is bug when you click on the dock link just when the dock loads for the first time after the preloader, on the next page the gsap complaints that it received an null object, and the animation for dock triggers early
 
 const Dock = () => {
+    const START_IDEAL_ANIMATION_DELAY = 1000; // 10 seconds
+
     const dockRef = useRef<HTMLDivElement>(null);
     const lidRef = useRef<HTMLDivElement>(null);
+
+    const { setTimeoutId, clearGlobalTimeout } = useGlobalTimeout();
 
     const pathname = usePathname();
     const {
@@ -29,13 +36,24 @@ const Dock = () => {
         hasShown: preloaderShown,
         setHasShown: setPreloaderShown,
     } = usePreloaderStore();
-    const { setDockAnimating, isDockAnimating } = useAnimationStore();
+    const {
+        setDockAnimating,
+        isDockAnimating,
+        setIdealAnimationEnabled,
+        isIdealAnimationEnabled,
+    } = useAnimationStore();
 
     const isIdle = useIdle(5000, {
-        enabled: !isDockAnimating,
+        enabled:
+            isIdealAnimationEnabled &&
+            preloaderComplete &&
+            preloaderShown &&
+            !isDockAnimating,
     });
 
     useEffect(() => {
+        clearGlobalTimeout();
+
         if (!dockRef.current || !lidRef.current) {
             return;
         }
@@ -52,6 +70,8 @@ const Dock = () => {
         gsap.set(inactiveLinks, {
             width: 0,
         });
+
+        // eslint-disable-next-line
     }, []);
 
     useEffect(() => {
@@ -75,8 +95,14 @@ const Dock = () => {
                 dockLid: lidRef.current,
                 inactiveLinks: inactiveLinks,
             });
-            setDockAnimating(false);
             setPreloaderShown(true);
+            setDockAnimating(false);
+
+            setTimeoutId(
+                setTimeout(() => {
+                    setIdealAnimationEnabled(true);
+                }, START_IDEAL_ANIMATION_DELAY)
+            ); // count this in as part of the animation delay
         };
 
         handleExpandDock();
@@ -85,6 +111,8 @@ const Dock = () => {
         setDockAnimating,
         setPreloaderShown,
         preloaderShown,
+        setIdealAnimationEnabled,
+        setTimeoutId,
     ]);
 
     useEffect(() => {
@@ -109,32 +137,48 @@ const Dock = () => {
                 inactiveLinks: inactiveLinks,
             });
             setDockAnimating(false);
+
+            setTimeoutId(
+                setTimeout(() => {
+                    setIdealAnimationEnabled(true);
+                }, START_IDEAL_ANIMATION_DELAY)
+            ); // count this in as part of the animation delay
         };
 
         handleExpandDock();
-    }, [preloaderComplete, setDockAnimating, preloaderShown]);
+    }, [
+        preloaderComplete,
+        setDockAnimating,
+        preloaderShown,
+        setIdealAnimationEnabled,
+        setTimeoutId,
+    ]);
 
-    useEffect(() => {
-        if (!dockRef.current) {
-            return;
-        }
-        // NOTE : Had to create this because the idle state was not being applied immediately, they took time, and if in that time the user clicks on the dock, it breaks the dock animation.
-        // This is a hack to ensure that the dock is not clickable while the animation is happening.
+    // useEffect(() => {
+    //     if (!dockRef.current) {
+    //         return;
+    //     }
+    //     // NOTE : Had to create this because the idle state was not being applied immediately, they took time, and if in that time the user clicks on the dock, it breaks the dock animation.
+    //     // This is a hack to ensure that the dock is not clickable while the animation is happening.
 
-        if (isDockAnimating) {
-            dockRef.current.style.pointerEvents = "none";
-        } else {
-            setTimeout(() => {
-                if (!dockRef.current) {
-                    return;
-                }
-                dockRef.current.style.pointerEvents = "auto";
-            }, 100);
-        }
-    }, [isDockAnimating]);
+    //     if (isDockAnimating) {
+    //         dockRef.current.style.pointerEvents = "none";
+    //     } else {
+    //         setTimeout(() => {
+    //             if (!dockRef.current) {
+    //                 return;
+    //             }
+    //             dockRef.current.style.pointerEvents = "auto";
+    //         }, 100);
+    //     }
+    // }, [isDockAnimating]);
 
     useEffect(() => {
         if (isDockAnimating || !preloaderComplete || !preloaderShown) {
+            return;
+        }
+
+        if (!isIdealAnimationEnabled) {
             return;
         }
 
@@ -157,7 +201,13 @@ const Dock = () => {
                 inactiveLinks: inactiveLinks,
             });
         }
-    }, [isIdle, isDockAnimating, preloaderComplete, preloaderShown]);
+    }, [
+        isIdle,
+        isDockAnimating,
+        preloaderComplete,
+        preloaderShown,
+        isIdealAnimationEnabled,
+    ]);
 
     return (
         <div
@@ -187,6 +237,9 @@ const Dock = () => {
                                 <TransitionLink
                                     href={route.path}
                                     className={linkClasses}
+                                    onClick={() => {
+                                        clearGlobalTimeout();
+                                    }}
                                 >
                                     <route.icon className="h-6 w-6" />
                                 </TransitionLink>

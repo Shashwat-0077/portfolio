@@ -11,11 +11,13 @@ const TransitionLink = ({
     children,
     href,
     className,
+    onClick,
 }: {
     children: React.ReactNode;
     href: string;
     className?: string;
     active?: boolean;
+    onClick?: (e: React.MouseEvent) => void;
 }) => {
     const pathname = usePathname();
     const router = useTransitionRouter();
@@ -24,6 +26,7 @@ const TransitionLink = ({
         setDockAnimating,
         setCursorDisabled,
         setTransitioning,
+        setIdealAnimationEnabled,
     } = useAnimationStore();
 
     const clearCursorAnimations = () => {
@@ -60,6 +63,7 @@ const TransitionLink = ({
         setDockAnimating(true);
         setCursorDisabled(true);
         setTransitioning(true);
+        setIdealAnimationEnabled(false);
 
         try {
             if (dock && inactiveLinks.length > 0 && dockLid) {
@@ -89,7 +93,12 @@ const TransitionLink = ({
             href={href}
             prefetch={true}
             className={className}
-            onClick={(e) => handleNavigation(e, href)}
+            onClick={(e) => {
+                if (onClick) {
+                    onClick(e);
+                }
+                handleNavigation(e, href);
+            }}
             type="button"
         >
             {children}
