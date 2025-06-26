@@ -10,7 +10,7 @@ import { ChevronRight, Download, Github, Linkedin, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import TransitionLink from "@/components/transition-link";
 import Magnetic from "@/components/ui/magnetic";
-import Galaxy from "@/components/pages/skills/galaxy";
+import BitmojiFace from "@/components/BitmojiFace";
 
 const HeroSection = () => {
     const headerRef = useRef<HTMLHeadingElement>(null);
@@ -87,9 +87,8 @@ const HeroSection = () => {
     });
 
     return (
-        <section className="relative flex min-h-screen flex-col justify-start gap-60 overflow-x-hidden pt-8 text-white">
-            <Galaxy />
-            <div className="container mx-auto">
+        <section className="relative container mx-auto grid min-h-screen grid-cols-2 gap-60 overflow-x-hidden pt-8 text-white">
+            <div>
                 <Image
                     src="/logo.svg"
                     alt="Logo"
@@ -97,8 +96,6 @@ const HeroSection = () => {
                     height={50}
                     priority
                 />
-            </div>
-            <div className="container mx-auto">
                 <div className="mt-10 flex gap-7">
                     <Magnetic className="cursor-pointer" color="#6b7277">
                         <Github size={30} />
@@ -193,6 +190,7 @@ const HeroSection = () => {
                     </Button>
                 </div>
             </div>
+            <BitmojiFace />
         </section>
     );
 };

@@ -63,17 +63,27 @@ const TechSection = () => {
                 ].map(({ description, title, Icon, defaultIconColor }) => {
                     return (
                         <div
-                            className="card group text-card-foreground bg-border/10 relative overflow-hidden rounded-lg shadow-sm"
+                            className="card group text-card-foreground relative overflow-hidden rounded-lg shadow-sm"
                             key={title}
                         >
                             {/* card border */}
-                            <div className="card-border absolute top-0 left-0 z-[1] h-full w-full border-inherit bg-[radial-gradient(400px_circle_at_var(--mouse-x)_var(--mouse-y),rgba(112,119,255,0.5),transparent_40%)] opacity-0 transition-opacity duration-300 content-['']" />
+                            <div
+                                style={{
+                                    background: `radial-gradient(400px circle at var(--mouse-x) var(--mouse-y), color-mix(in oklch, var(--primary) 50%, transparent), transparent 40%)`,
+                                }}
+                                className="card-border absolute top-0 left-0 z-[1] h-full w-full border-inherit opacity-0 transition-opacity duration-300 content-['']"
+                            />
 
                             {/* card before (mimic pseudo element) */}
-                            <div className="card-before absolute top-0 left-0 z-[3] h-full w-full border-inherit bg-[radial-gradient(800px_circle_at_var(--mouse-x)_var(--mouse-y),rgba(112,119,255,0.1),transparent_40%)] opacity-0 transition-opacity duration-300 content-[''] group-hover:opacity-100" />
+                            <div
+                                style={{
+                                    background: `radial-gradient(400px circle at var(--mouse-x) var(--mouse-y), color-mix(in oklch, var(--primary) 10%, transparent), transparent 40%)`,
+                                }}
+                                className="card-before absolute top-0 left-0 z-[3] h-full w-full border-inherit opacity-0 transition-opacity duration-300 content-[''] group-hover:opacity-100"
+                            />
 
                             {/* card content */}
-                            <div className="card-content relative z-[2] m-[1px] flex h-[calc(100%-2px)] w-[calc(100%-2px)] items-center justify-between gap-4 rounded-[inherit] bg-[#343434] p-6">
+                            <div className="card-content relative z-[2] m-[1px] flex h-[calc(100%-2px)] w-[calc(100%-2px)] items-center justify-between gap-4 rounded-[inherit] bg-[oklch(19.5%_0_0)] p-6">
                                 <div className="space-y-1.5">
                                     <h3 className="text-lg font-semibold">
                                         {title}

@@ -4,7 +4,7 @@ import Dock from "@/components/ui/dock";
 import HeroSection from "@/components/pages/home/HeroSection";
 import TechSection from "@/components/pages/home/TechSection";
 import ProjectSection from "@/components/pages/home/ProjectSection";
-import EducationSection from "@/components/pages/home/EducationSection";
+// import EducationSection from "@/components/pages/home/EducationSection";
 
 export const metadata: Metadata = {
     title: "Shashwat Gupta",
@@ -46,7 +46,7 @@ export default function HomePage() {
                 {/* Projects */}
                 <ProjectSection />
                 {/* Education */}
-                <EducationSection />
+                {/* <EducationSection /> */}
             </div>
         </main>
     );

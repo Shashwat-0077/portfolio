@@ -3,92 +3,9 @@
 import { useRef, useState, useEffect } from "react";
 import { useWindowSize } from "react-use";
 import { useTransitionRouter } from "next-view-transitions";
+import gsap from "gsap";
 
-import { usePreloaderStore } from "@/store/preloader-store";
-import { ROUTES_TO_PREFETCH } from "@/lib/constants";
-import { PreloaderAnimations, ProgressBarAnimations } from "@/lib/animations";
-
-// Enhanced route prefetching utility
-class RoutePrefetcher {
-    private prefetchedRoutes = new Set<string>();
-
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    constructor(private router: any) {}
-
-    // Prefetch all routes with better error handling
-    async prefetchRoutes(routes: string[]): Promise<void> {
-        try {
-            const routesToPrefetch = routes.filter(
-                (route) => !this.prefetchedRoutes.has(route)
-            );
-
-            const prefetchPromises = routesToPrefetch.map(async (route) => {
-                try {
-                    await this.router.prefetch(route);
-                    this.prefetchedRoutes.add(route);
-                } catch (error) {
-                    // eslint-disable-next-line no-console
-                    console.warn(
-                        `❌ Failed to prefetch route ${route}:`,
-                        error
-                    );
-                }
-            });
-
-            await Promise.all(prefetchPromises);
-        } catch (error) {
-            // eslint-disable-next-line no-console
-            console.error("Error during route prefetching:", error);
-        }
-    }
-
-    // Check network conditions before prefetching
-    shouldPrefetch(): boolean {
-        if (typeof navigator === "undefined") {
-            return true;
-        }
-
-        // Check if user has data saver enabled
-        if ("connection" in navigator) {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            const connection = (navigator as any).connection;
-            if (connection?.saveData) {
-                // eslint-disable-next-line no-console
-                console.log("🚫 Skipping prefetch - Data saver enabled");
-                return false;
-            }
-
-            // Check connection speed - be more lenient for route prefetching
-            if (connection?.effectiveType === "slow-2g") {
-                // eslint-disable-next-line no-console
-                console.log(
-                    "🚫 Skipping prefetch - Very slow connection detected"
-                );
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    // Execute prefetching strategy
-    async executePrefetch(): Promise<void> {
-        if (!this.shouldPrefetch()) {
-            return;
-        }
-
-        await this.prefetchRoutes(ROUTES_TO_PREFETCH);
-    }
-
-    // Get prefetch status
-    getStatus() {
-        return {
-            prefetched: this.prefetchedRoutes.size,
-            total: ROUTES_TO_PREFETCH.length,
-            routes: Array.from(this.prefetchedRoutes),
-        };
-    }
-}
+const ROUTES_TO_PREFETCH = ["/", "/skills", "/projects", "/contact"];
 
 const Preloader = () => {
     const totalDuration = 2000;
@@ -99,110 +16,140 @@ const Preloader = () => {
     const textContainerRef = useRef<HTMLDivElement>(null);
     const progressBarRef = useRef<HTMLDivElement>(null);
 
-    const { isLoading, hasShown, setIsLoading, setHasShown } =
-        usePreloaderStore();
     const [currentTextIndex, setCurrentTextIndex] = useState(0);
-    const [prefetchStatus, setPrefetchStatus] = useState({
-        prefetched: 0,
-        total: 0,
-        routes: [] as string[],
-    });
-
-    // Initialize prefetcher
-    const prefetcherRef = useRef<RoutePrefetcher | null>(null);
+    const [isComplete, setIsComplete] = useState(false);
+    const [isMounted, setIsMounted] = useState(false);
 
     const greetings = [
-        "hello", // English
-        "नमस्कार", // Marathi, Nepali, Konkani, Maithili, Bengali, Assamese, Odia, Gujarati
-        "नमः", // Sanskrit
-        "வணக்கம்", // Tamil
-        "నమస్కారం", // Telugu
-        "നമസ്കാരം", // Malayalam
-        "ನಮಸ್ಕಾರ", // Kannada
-        "السلام علیکم", // Urdu, Kashmiri, Sindhi
-        "खोय", // Bodo
-        "ꯊꯧꯕꯥ", // Manipuri (Meitei): "Khoi Bha"
-        "ᱵᱟᱝᱜᱟ", // Santali
-        "ਸਤ ਸ੍ਰੀ ਅਕਾਲ", // Punjabi
-        "नमस्ते", // Hindi, Dogri
+        "hello",
+        "नमस्कार",
+        "नमः",
+        "வணக்கம்",
+        "నమస్కారం",
+        "നമസ്കാരം",
+        "ನಮಸ್ಕಾರ",
+        "السلام علیکم",
+        "खोय",
+        "ꯊꯧꯕꯥ",
+        "ᱵᱟᱝᱜᱟ",
+        "ਸਤ ਸ੍ਰੀ ਅਕਾਲ",
+        "नमस्ते",
     ];
 
-    // Animation cycle effect
+    // Set mounted state
     useEffect(() => {
-        if (hasShown || !isLoading) {
+        setIsMounted(true);
+    }, []);
+
+    useEffect(() => {
+        if (isComplete || !isMounted) {
             return;
         }
 
-        // Initialize prefetcher
-        if (!prefetcherRef.current) {
-            prefetcherRef.current = new RoutePrefetcher(router);
-        }
-
-        // Enhanced route prefetching with status tracking
-        const executeRoutePrefetching = async () => {
+        // Prefetch routes
+        const prefetchRoutes = async () => {
             try {
-                // Start prefetching immediately
-                await prefetcherRef.current?.executePrefetch();
-
-                // Update status after prefetching
-                if (prefetcherRef.current) {
-                    const status = prefetcherRef.current.getStatus();
-                    setPrefetchStatus(status);
-                }
+                await Promise.all(
+                    ROUTES_TO_PREFETCH.map((route) => router.prefetch(route))
+                );
             } catch (error) {
                 // eslint-disable-next-line no-console
-                console.error("Route prefetching failed:", error);
+                console.warn("Failed to prefetch routes:", error);
             }
         };
 
-        ProgressBarAnimations.animate({
-            progressBar: progressBarRef.current,
-            width: width,
-            totalDuration: totalDuration,
-        });
+        prefetchRoutes();
 
-        // Text cycling animation
+        // Animate progress bar
+        if (progressBarRef.current) {
+            gsap.to(progressBarRef.current, {
+                width: width > 400 ? "400px" : "77vw",
+                duration: totalDuration / 1000,
+                ease: "circ.inOut",
+            });
+        }
+
+        // Text cycling
         const intervalTime = totalDuration / greetings.length;
         let currentIndex = 0;
 
         const intervalId = setInterval(() => {
-            currentIndex = currentIndex + 1;
+            currentIndex++;
 
             if (currentIndex >= greetings.length) {
                 clearInterval(intervalId);
-                PreloaderAnimations.animateOut({
-                    preloader: preloaderRef.current,
-                    textContainer: textContainerRef.current,
-                    setHasShown,
-                    setIsLoading,
+
+                // Animate out
+                const tl = gsap.timeline({
+                    onComplete: () => {
+                        setIsComplete(true);
+                        // Safer DOM removal
+                        if (preloaderRef.current) {
+                            try {
+                                // Check if element still exists and has a parent
+                                if (
+                                    document.body.contains(preloaderRef.current)
+                                ) {
+                                    preloaderRef.current.style.display = "none";
+                                    // Use a small delay to ensure animations are complete
+                                    setTimeout(() => {
+                                        if (
+                                            preloaderRef.current &&
+                                            document.body.contains(
+                                                preloaderRef.current
+                                            )
+                                        ) {
+                                            preloaderRef.current.remove();
+                                        }
+                                    }, 100);
+                                }
+                            } catch (error) {
+                                console.warn(
+                                    "Error removing preloader:",
+                                    error
+                                );
+                            }
+                        }
+                    },
                 });
+
+                if (textContainerRef.current) {
+                    tl.to(textContainerRef.current, {
+                        opacity: 0.5,
+                        scale: 0.8,
+                        duration: 0.5,
+                        ease: "power2.in",
+                    });
+                }
+
+                if (preloaderRef.current) {
+                    tl.to(preloaderRef.current, {
+                        y: "-100%",
+                        duration: 1.2,
+                        ease: "power4.inOut",
+                        delay: 0.2,
+                    });
+                }
+
                 return;
             }
 
             setCurrentTextIndex(currentIndex);
         }, intervalTime);
 
-        // Start route prefetching immediately (don't wait for animation)
-        executeRoutePrefetching();
-
         return () => clearInterval(intervalId);
-    }, [
-        isLoading,
-        hasShown,
-        setIsLoading,
-        setHasShown,
-        router,
-        greetings.length,
-        width,
-    ]);
+    }, [isComplete, isMounted, router, greetings.length, width, totalDuration]);
+
+    if (isComplete || !isMounted) {
+        return null;
+    }
 
     return (
         <div
             ref={preloaderRef}
-            className={`bg-background fixed inset-0 flex flex-col items-center justify-center overflow-hidden transition-opacity duration-300`}
+            className="bg-background fixed inset-0 flex flex-col items-center justify-center overflow-hidden"
             style={{ zIndex: 99999 }}
         >
-            {/* Main Text - Center */}
             <div className="flex flex-1 items-center justify-center">
                 <div
                     ref={textContainerRef}
@@ -217,21 +164,10 @@ const Preloader = () => {
             </div>
 
             <div className="fixed bottom-5 flex flex-col items-center justify-center gap-2">
-                {/* Optional: Show prefetch status during development */}
-                {process.env.NODE_ENV === "development" &&
-                    prefetchStatus.prefetched > 0 && (
-                        <div className="mb-2 text-xs text-white/60">
-                            Prefetched: {prefetchStatus.prefetched}/
-                            {prefetchStatus.total} routes
-                        </div>
-                    )}
-
                 <div
                     className="bg-foreground h-1 w-0 rounded-full"
                     ref={progressBarRef}
-                >
-                    &nbsp;
-                </div>
+                />
             </div>
         </div>
     );
