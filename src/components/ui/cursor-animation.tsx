@@ -121,8 +121,6 @@ const CursorAnimation = () => {
 const CursorAnimationForNonCompatibleBrowsers = () => {
     const { isComplete } = usePreloaderStore();
 
-    console.log("CursorAnimationForNonCompatibleBrowsers rendered");
-
     useEffect(() => {
         if (!isComplete) {
             return;

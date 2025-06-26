@@ -134,7 +134,7 @@ const Dock = () => {
     }, [isDockAnimating]);
 
     useEffect(() => {
-        if (isDockAnimating) {
+        if (isDockAnimating || !preloaderComplete || !preloaderShown) {
             return;
         }
 
@@ -157,16 +157,13 @@ const Dock = () => {
                 inactiveLinks: inactiveLinks,
             });
         }
-    }, [isIdle, isDockAnimating]);
+    }, [isIdle, isDockAnimating, preloaderComplete, preloaderShown]);
 
     return (
         <div
             ref={dockRef}
             data-dock
             className="border-border fixed top-6 left-1/2 z-50 flex items-center justify-center overflow-hidden rounded-full border-2 bg-white/5 backdrop-blur-lg"
-            style={{
-                transform: "translateX(-50%)",
-            }}
         >
             <div
                 ref={lidRef}
