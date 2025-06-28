@@ -30,7 +30,7 @@ const ProjectCard = ({
     const timelineRef = React.useRef<gsap.core.Timeline | null>(null);
     const techContainerRef = React.useRef<HTMLDivElement>(null);
     const buttonContainerRef = React.useRef<HTMLDivElement>(null);
-    const [_isExpanded, setIsExpanded] = React.useState(false);
+    const [_, setIsExpanded] = React.useState(false);
 
     useGSAP(() => {
         if (!cardRed.current) {

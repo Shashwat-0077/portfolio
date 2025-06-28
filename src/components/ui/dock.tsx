@@ -154,25 +154,6 @@ const Dock = () => {
         setTimeoutId,
     ]);
 
-    // useEffect(() => {
-    //     if (!dockRef.current) {
-    //         return;
-    //     }
-    //     // NOTE : Had to create this because the idle state was not being applied immediately, they took time, and if in that time the user clicks on the dock, it breaks the dock animation.
-    //     // This is a hack to ensure that the dock is not clickable while the animation is happening.
-
-    //     if (isDockAnimating) {
-    //         dockRef.current.style.pointerEvents = "none";
-    //     } else {
-    //         setTimeout(() => {
-    //             if (!dockRef.current) {
-    //                 return;
-    //             }
-    //             dockRef.current.style.pointerEvents = "auto";
-    //         }, 100);
-    //     }
-    // }, [isDockAnimating]);
-
     useEffect(() => {
         if (isDockAnimating || !preloaderComplete || !preloaderShown) {
             return;

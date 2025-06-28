@@ -21,13 +21,20 @@ const TransitionLink = ({
 }) => {
     const pathname = usePathname();
     const router = useTransitionRouter();
-    const {
-        isDockAnimating,
-        setDockAnimating,
-        setCursorDisabled,
-        setTransitioning,
-        setIdealAnimationEnabled,
-    } = useAnimationStore();
+
+    const isDockAnimating = useAnimationStore((state) => state.isDockAnimating);
+    const setDockAnimating = useAnimationStore(
+        (state) => state.setDockAnimating
+    );
+    const setCursorDisabled = useAnimationStore(
+        (state) => state.setCursorDisabled
+    );
+    const setTransitioning = useAnimationStore(
+        (state) => state.setTransitioning
+    );
+    const setIdealAnimationEnabled = useAnimationStore(
+        (state) => state.setIdealAnimationEnabled
+    );
 
     const clearCursorAnimations = () => {
         const existingAnimations = document.querySelectorAll(

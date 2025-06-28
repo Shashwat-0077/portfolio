@@ -11,7 +11,7 @@ const Footer = () => {
             <div className="relative hidden max-h-[800px] w-full overflow-hidden md:block">
                 <Image
                     src={"/logo-outline.svg"}
-                    className="relative right-0 scale-120 md:right-20 md:scale-140 lg:right-40 lg:scale-150"
+                    className="pointer-events-none relative right-0 scale-120 select-none md:right-20 md:scale-140 lg:right-40 lg:scale-150"
                     alt="logo"
                     width={1000}
                     height={1000}

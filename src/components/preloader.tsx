@@ -153,11 +153,6 @@ const Preloader = () => {
         setComplete,
     ]);
 
-    // Don't show preloader if it has already been shown
-    if (isComplete || !isMounted) {
-        return null;
-    }
-
     return (
         <div
             ref={preloaderRef}

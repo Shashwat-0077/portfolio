@@ -3,26 +3,18 @@
 
 
 
-@font-face {
-    font-family: "Jersey10";
-    src: url("/fonts/jersey/Jersey10-Regular.ttf") format("truetype");
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-}
+
 
 @font-face {
-    font-family: "Garet";
-    src: url("/fonts/Chivo/Chivo-VariableFont_wght.ttf") format("truetype");
+    font-family: "Sansation";
+    src: url("/fonts/Sansation/Sansation-Regular.ttf") format("truetype");
     font-family: "Chivo", cursive;
     font-weight: 100 200 300 400 500 600 700 800 900;
     font-style: normal;
 }
 
-
 :root {
-    --jersey-font: "Jersey10", sans-serif;
-    --garet-font: "Garet", sans-serif;
+    --sansation: "Sensation", sans-serif;
     --background: oklch(18.5% 0 0);
     --foreground: oklch(98.2% 0.01 104);
     --card: oklch(4.2% 0 0);
@@ -159,5 +151,23 @@
     ::-webkit-scrollbar-thumb:hover {
         background: var(--primary);
         /* Hover effect */
+    }
+}
+
+@layer utilities {
+    @keyframes float {
+
+        0%,
+        100% {
+            transform: translateY(0px);
+        }
+
+        50% {
+            transform: translateY(-8px);
+        }
+    }
+
+    .animate-float {
+        animation: float 4s ease-in-out infinite;
     }
 }
