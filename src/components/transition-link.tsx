@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useTransitionRouter } from "next-view-transitions";
 import { usePathname } from "next/navigation";
 
-import { useAnimationStore } from "@/store/animation-store";
+import { useAnimationStore } from "@/stores/animation-store";
 import { DockAnimations, PageAnimations } from "@/lib/animations";
 
 const TransitionLink = ({
@@ -56,14 +56,6 @@ const TransitionLink = ({
             return;
         }
 
-        const dock = document.querySelector("[data-dock]") as HTMLDivElement;
-        const dockLid = document.querySelector(
-            "[data-dock-lid]"
-        ) as HTMLDivElement;
-        const inactiveLinks = Array.from(
-            dock.querySelectorAll(`.dock-link.inactive`)
-        ) as HTMLElement[];
-
         clearCursorAnimations();
 
         // Set states
@@ -71,6 +63,14 @@ const TransitionLink = ({
         setCursorDisabled(true);
         setTransitioning(true);
         setIdealAnimationEnabled(false);
+
+        const dock = document.querySelector("[data-dock]") as HTMLDivElement;
+        const dockLid = document.querySelector(
+            "[data-dock-lid]"
+        ) as HTMLDivElement;
+        const inactiveLinks = Array.from(
+            dock.querySelectorAll(`.dock-link.inactive`)
+        ) as HTMLElement[];
 
         try {
             if (dock && inactiveLinks.length > 0 && dockLid) {

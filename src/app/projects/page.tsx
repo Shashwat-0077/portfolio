@@ -3,7 +3,7 @@
 import { Dock, DockForNonCompatibleBrowsers } from "@/components/ui/dock";
 import { PROJECTS } from "@/data/projects";
 import ProjectCard from "@/components/ui/project-card";
-import { useAnimationStore } from "@/store/animation-store";
+import { useAnimationStore } from "@/stores/animation-store";
 
 export default function ProjectsPage() {
     const { isCompatible } = useAnimationStore();

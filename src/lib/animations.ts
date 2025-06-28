@@ -14,6 +14,10 @@ export const DockAnimations = {
         dockLid: HTMLDivElement;
         onComplete?: () => void;
     }): Promise<void> => {
+        if (!dock || !inactiveLinks || !dockLid) {
+            return Promise.resolve();
+        }
+
         return new Promise((resolve) => {
             const tl = gsap.timeline({
                 onComplete: () => {
@@ -68,6 +72,10 @@ export const DockAnimations = {
         dockLid: HTMLElement;
         onComplete?: () => void;
     }): Promise<void> => {
+        if (!dock || !inactiveLinks || !dockLid) {
+            return Promise.resolve();
+        }
+
         return new Promise((resolve) => {
             gsap.set(dockLid, {
                 opacity: 0,

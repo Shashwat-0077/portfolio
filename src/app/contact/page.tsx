@@ -1,10 +1,7 @@
 "use client";
 
-import TimelineDragScroll from "@/components/TimelineDragScroll";
 import { Dock, DockForNonCompatibleBrowsers } from "@/components/ui/dock";
-import { useAnimationStore } from "@/store/animation-store";
-
-// TODO : add satellite
+import { useAnimationStore } from "@/stores/animation-store";
 
 export default function ContactPage() {
     const { isCompatible } = useAnimationStore();
@@ -15,7 +12,7 @@ export default function ContactPage() {
                 {!isCompatible ? <DockForNonCompatibleBrowsers /> : <Dock />}
 
                 <main className="min-h-[3000px] bg-gray-950 text-white">
-                    <TimelineDragScroll />
+                    {/* <TimelineDragScroll /> */}
                 </main>
             </div>
         </>

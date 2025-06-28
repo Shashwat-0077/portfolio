@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/cursor-animation";
 import Preloader from "@/components/preloader";
 import Footer from "@/components/footer";
-import { useAnimationStore } from "@/store/animation-store";
+import { useAnimationStore } from "@/stores/animation-store";
 import { BROWSER_SUPPORT } from "@/lib/constants";
 
 export default function RootLayout({

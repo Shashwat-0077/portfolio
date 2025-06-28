@@ -5,24 +5,17 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 import { Observer } from "gsap/Observer";
-import {
-    ChevronRight,
-    Code,
-    Download,
-    Github,
-    GitPullRequestArrow,
-    GraduationCap,
-    Linkedin,
-    Mail,
-    Music,
-} from "lucide-react";
+import { ChevronRight, Download, Github, Linkedin, Mail } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import TransitionLink from "@/components/transition-link";
 import Magnetic from "@/components/ui/magnetic";
-import { useAnimationStore } from "@/store/animation-store";
+import { useAnimationStore } from "@/stores/animation-store";
 import { Dock, DockForNonCompatibleBrowsers } from "@/components/ui/dock";
-import CloudBubble from "@/components/ui/CloudBubble";
+import NowListening from "@/components/ui/now-listening";
+import LatestCommit from "@/components/ui/latest-commit";
+import Learning from "@/components/ui/learning";
+import WakatimeStats from "@/components/ui/wakatime-stats";
 
 gsap.registerPlugin(Observer);
 
@@ -180,43 +173,11 @@ const HeroSection = () => {
                 </div>
 
                 <div className="relative mx-auto aspect-square w-full overflow-visible">
-                    {/* Top Left - grows towards top-left */}
-                    <CloudBubble
-                        position={[70, 80]}
-                        shrunkSize={80}
-                        expandedSize={[400, 200]}
-                        Icon={<Music strokeWidth={2} size={35} />}
-                        anchorPoint="bottom-right"
-                    />
+                    <NowListening />
+                    <WakatimeStats />
+                    <LatestCommit />
+                    <Learning />
 
-                    {/* Top Right - grows towards top-right */}
-                    <CloudBubble
-                        position={[80, 10]}
-                        shrunkSize={80}
-                        expandedSize={[400, 200]}
-                        Icon={<Code strokeWidth={2} size={35} />}
-                        anchorPoint="bottom-right"
-                    />
-
-                    {/* Bottom Right - grows towards bottom-right */}
-                    <CloudBubble
-                        position={[75, 15]}
-                        shrunkSize={80}
-                        expandedSize={[400, 200]}
-                        Icon={<GitPullRequestArrow strokeWidth={2} size={30} />}
-                        anchorPoint="top-right"
-                    />
-
-                    {/* Bottom Left - grows towards bottom-left */}
-                    <CloudBubble
-                        position={[10, 90]}
-                        shrunkSize={80}
-                        expandedSize={[400, 200]}
-                        Icon={<GraduationCap strokeWidth={2} size={35} />}
-                        anchorPoint="bottom-right"
-                    />
-
-                    {/* Main Image - center */}
                     <Image
                         src="/chilling.png"
                         alt="Hero Image"

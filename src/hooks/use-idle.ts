@@ -19,7 +19,7 @@ interface UseIdleOptions {
     enabled?: boolean;
 }
 
-const useIdle = (
+export const useIdle = (
     ms: number = oneMinute,
     {
         initialState = false,
@@ -82,5 +82,3 @@ const useIdle = (
 
     return state;
 };
-
-export default useIdle;

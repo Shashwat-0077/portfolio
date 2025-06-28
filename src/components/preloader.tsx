@@ -5,7 +5,7 @@ import { useWindowSize } from "react-use";
 import { useTransitionRouter } from "next-view-transitions";
 import gsap from "gsap";
 
-import { usePreloaderStore } from "@/store/preloader-store";
+import { usePreloaderStore } from "@/stores/preloader-store";
 
 const ROUTES_TO_PREFETCH = ["/", "/skills", "/projects", "/contact"];
 

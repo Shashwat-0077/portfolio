@@ -18,8 +18,8 @@ interface AnimationState {
 
 export const useAnimationStore = create<AnimationState>((set) => ({
     isCompatible: false,
-    isDockAnimating: false,
-    isCursorDisabled: false,
+    isDockAnimating: true,
+    isCursorDisabled: true,
     isTransitioning: false,
     isIdealAnimationEnabled: false,
     // Actions

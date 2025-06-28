@@ -6,11 +6,12 @@ import gsap from "gsap";
 import { Observer } from "gsap/Observer";
 
 import { cn } from "@/lib/utils";
-import { useBubbleStore } from "@/store/bubble-store";
+import { useBubbleStore } from "@/stores/bubble-store";
 
 type AnchorPoints = "top-left" | "top-right" | "bottom-right" | "bottom-left";
 
 const CloudBubble = ({
+    uniqueId,
     position,
     className,
     shrunkSize,
@@ -19,6 +20,7 @@ const CloudBubble = ({
     anchorPoint,
     children,
 }: {
+    uniqueId?: string;
     position: [number, number];
     expandedSize: [number, number];
     shrunkSize: number;
@@ -27,11 +29,14 @@ const CloudBubble = ({
     Icon?: React.ReactNode;
     anchorPoint?: AnchorPoints;
     children?: React.ReactNode;
+    onChange?: (expanded: boolean) => void;
 }) => {
     const cloudRef = useRef<HTMLDivElement>(null);
     const timelineRef = useRef<gsap.core.Timeline | null>(null);
     const floatAnimationRef = useRef<gsap.core.Timeline | null>(null);
-    const bubbleId = useId();
+
+    const generatedId = useId(); // Always call useId unconditionally
+    const bubbleId = uniqueId ?? generatedId; // Use uniqueId if provided, otherwise fallback
 
     const { expandedBubbleId, setExpandedBubble } = useBubbleStore();
     const isExpanded = expandedBubbleId === bubbleId;
@@ -186,7 +191,7 @@ const CloudBubble = ({
         <div
             className={cn(
                 className,
-                "absolute z-50 grid aspect-square cursor-pointer place-content-center rounded-[20px] border-2 bg-white/5"
+                "absolute z-50 aspect-square overflow-hidden rounded-[20px] border-2 border-white/10 bg-white/5"
             )}
             style={{
                 ...(anchorPoint === "top-left" && {
@@ -209,6 +214,7 @@ const CloudBubble = ({
                 width: `${shrunkSize}px`,
                 height: `${shrunkSize}px`,
                 backdropFilter: "blur(10px)",
+                cursor: isExpanded ? "default" : "pointer",
             }}
             ref={cloudRef}
         >

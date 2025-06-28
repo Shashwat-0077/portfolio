@@ -4,7 +4,7 @@ import { Dock, DockForNonCompatibleBrowsers } from "@/components/ui/dock";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { TECHNOLOGIES } from "@/data/technologies";
 import TechCards from "@/components/ui/tech-cards";
-import { useAnimationStore } from "@/store/animation-store";
+import { useAnimationStore } from "@/stores/animation-store";
 
 export default function SkillsPage() {
     const { isCompatible } = useAnimationStore();
