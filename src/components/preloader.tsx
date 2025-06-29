@@ -6,6 +6,7 @@ import { useTransitionRouter } from "next-view-transitions";
 import gsap from "gsap";
 
 import { usePreloaderStore } from "@/stores/preloader-store";
+import { useAnimationStore } from "@/stores/animation-store";
 
 const ROUTES_TO_PREFETCH = ["/", "/skills", "/projects", "/contact"];
 
@@ -22,6 +23,9 @@ const Preloader = () => {
     const [isAnimatingOut, setIsAnimatingOut] = useState(false);
     const [isMounted, setIsMounted] = useState(false);
 
+    const setCursorDisabled = useAnimationStore(
+        (state) => state.setCursorDisabled
+    );
     const { isComplete, setComplete } = usePreloaderStore();
 
     const greetings = [
@@ -87,6 +91,7 @@ const Preloader = () => {
                     onComplete: () => {
                         // Signal that preloader is complete - this will trigger dock animation
                         setComplete(true);
+                        setCursorDisabled(false);
 
                         // Safe DOM removal
                         if (preloaderRef.current) {

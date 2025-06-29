@@ -18,12 +18,13 @@ import { useAnimationStore } from "@/stores/animation-store";
 import TransitionLink from "@/components/transition-link";
 import { DockAnimations } from "@/lib/animations";
 import { useIdle } from "@/hooks";
-import { useGlobalTimeout } from "@/stores/timeref-store";
+import { useGlobalTimeout } from "@/stores/time-ref-store";
 
-// BUG Maybe : On phone dock is still expanding after it animates out not sure why though, it happens sometimes, not always
+// BUG Maybe : dock is still expanding after it animates out not sure why though, it happens sometimes, not always
 
 const Dock = () => {
     const START_IDEAL_ANIMATION_DELAY = 1000; // 10 seconds
+    const IDLE_TRIGGER_DURATION = 10000; // 5 seconds
 
     const dockRef = useRef<HTMLDivElement>(null);
     const lidRef = useRef<HTMLDivElement>(null);
@@ -43,7 +44,7 @@ const Dock = () => {
         isIdealAnimationEnabled,
     } = useAnimationStore();
 
-    const isIdle = useIdle(5000, {
+    const isIdle = useIdle(IDLE_TRIGGER_DURATION, {
         enabled:
             isIdealAnimationEnabled &&
             preloaderComplete &&
@@ -186,7 +187,7 @@ const Dock = () => {
         <div
             ref={dockRef}
             data-dock
-            className="border-border fixed top-6 left-1/2 z-50 flex items-center justify-center overflow-hidden rounded-full border-2 bg-white/5 backdrop-blur-lg"
+            className="border-border bg-dock-background fixed top-6 left-1/2 z-50 flex items-center justify-center overflow-hidden rounded-full border-2"
         >
             <div
                 ref={lidRef}

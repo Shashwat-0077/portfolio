@@ -3,7 +3,7 @@ import { Technology } from "@/data/technologies";
 export const PROJECTS = {
     Momentum: {
         logoUrl: "/projects/Momentum/logo.svg",
-        backgroundImageUrl: "/projects/Momentum/background.png",
+        backgroundImageUrl: "/projects/Momentum/background.webp",
         title: "Momentum",
         description:
             "Momentum is a powerful web app that helps you track, visualize, and manage your data effortlessly. With seamless Notion integration, you can sync and analyze your Notion databases alongside your personal data. Momentum features interactive charts for deep insights, a habit tracker with vibrant heat-maps to monitor your progress, and a clean, intuitive interface to keep you organized and motivated every step of the way",
@@ -22,7 +22,7 @@ export const PROJECTS = {
     },
     "Virtual Doc": {
         logoUrl: "/projects/VirtualDoc/logo.svg",
-        backgroundImageUrl: "/projects/VirtualDoc/background.png",
+        backgroundImageUrl: "/projects/VirtualDoc/background.webp",
         title: "Virtual Doc",
         description:
             "Connect with doctors instantly, book appointments with ease, and consult via secure video calls — all in one place. Built with a powerful tech stack: real-time communication using Socket.IO and WebRTC, a seamless interface powered by Next.js, a robust backend with Express and MongoDB, and secure login through Google Authentication. Your care, re-imagined.",

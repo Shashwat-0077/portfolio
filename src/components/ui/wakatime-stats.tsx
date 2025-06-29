@@ -130,19 +130,17 @@ const WakatimeStats = () => {
                 gsap.fromTo(
                     statsItems,
                     {
-                        scale: 0,
                         y: 20,
                         opacity: 0,
                         rotateX: -90,
                     },
                     {
-                        scale: 1,
                         y: 0,
                         opacity: 1,
                         rotateX: 0,
                         duration: 0.5,
                         stagger: 0.15,
-                        ease: "back.out(1.7)",
+                        ease: "power2.out",
                         delay: 0.5,
                     }
                 );

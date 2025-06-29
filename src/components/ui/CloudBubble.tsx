@@ -55,8 +55,14 @@ const CloudBubble = ({
                 if (!cloudRef.current) {
                     return;
                 }
-                const deltaX = (Math.random() - 0.5) * 20;
-                const deltaY = (Math.random() - 0.5) * 20;
+
+                const randomInExcludedRange = () => {
+                    const value = Math.random() * 5 + 5;
+                    return Math.random() < 0.5 ? -value : value;
+                };
+
+                const deltaX = randomInExcludedRange();
+                const deltaY = randomInExcludedRange();
 
                 floatAnimationRef.current = gsap.timeline({
                     onComplete: animate,
@@ -191,7 +197,7 @@ const CloudBubble = ({
         <div
             className={cn(
                 className,
-                "absolute z-50 aspect-square overflow-hidden rounded-[20px] border-2 border-white/10 bg-white/5"
+                "absolute z-20 aspect-square overflow-hidden rounded-[20px] border-2 border-white/10 bg-white/5"
             )}
             style={{
                 ...(anchorPoint === "top-left" && {

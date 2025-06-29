@@ -199,7 +199,7 @@ const NowListening = () => {
             uniqueId={id}
             position={[70, 80]}
             shrunkSize={80}
-            expandedSize={[400, 210]}
+            expandedSize={[400, 215]}
             Icon={<Music strokeWidth={2} size={35} />}
             anchorPoint="bottom-right"
         >

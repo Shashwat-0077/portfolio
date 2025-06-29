@@ -127,42 +127,30 @@ const ProjectCard = ({
                 );
         };
 
-        const isTouchDevice = "ontouchstart" in window;
-
-        if (isTouchDevice) {
-            // Touch device: click to toggle
-            Observer.create({
-                target: cardRed.current,
-                type: "touch",
-                onClick: () => {
-                    setIsExpanded((prev) => {
-                        const newState = !prev;
-                        if (newState) {
-                            animateToExpanded();
-                        } else {
-                            animateToCollapsed();
-                        }
-                        return newState;
-                    });
-                },
-            });
-        } else {
-            // Non-touch device: hover behavior
-            Observer.create({
-                target: cardRed.current,
-                type: "pointer",
-                onHover: () => {
-                    animateToExpanded();
-                },
-                onHoverEnd: () => {
-                    animateToCollapsed();
-                },
-            });
-        }
+        Observer.create({
+            target: cardRed.current,
+            type: "touch,pointer",
+            onClick: () => {
+                setIsExpanded((prev) => {
+                    const newState = !prev;
+                    if (newState) {
+                        animateToExpanded();
+                    } else {
+                        animateToCollapsed();
+                    }
+                    return newState;
+                });
+            },
+        });
     }, []);
 
     return (
-        <div className="h-full w-full">
+        <div
+            className="h-full w-full"
+            style={{
+                cursor: "pointer",
+            }}
+        >
             <style jsx>{`
                 .card {
                     background-image: url("${backgroundImageUrl}");
@@ -172,7 +160,6 @@ const ProjectCard = ({
                     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
                 }
                 .card-content {
-                    backdrop-filter: blur(5px);
                     background-color: rgba(0, 0, 0, 0.2);
                     color: white;
                 }
