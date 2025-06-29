@@ -49,114 +49,123 @@ const Preloader = () => {
         setIsMounted(true);
     }, []);
 
-    useEffect(() => {
-        // Only show preloader on first visit
-        if (isComplete || !isMounted || isAnimatingOut) {
-            return;
-        }
-
-        // Prefetch routes
-        const prefetchRoutes = async () => {
-            try {
-                await Promise.all(
-                    ROUTES_TO_PREFETCH.map((route) => router.prefetch(route))
-                );
-            } catch (_) {}
-        };
-
-        prefetchRoutes();
-
-        // Animate progress bar
-        if (progressBarRef.current) {
-            gsap.to(progressBarRef.current, {
-                width: width > 400 ? "400px" : "77vw",
-                duration: totalDuration / 1000,
-                ease: "circ.inOut",
-            });
-        }
-
-        // Text cycling
-        const intervalTime = totalDuration / greetings.length;
-        let currentIndex = 0;
-
-        const intervalId = setInterval(() => {
-            currentIndex++;
-
-            if (currentIndex >= greetings.length) {
-                clearInterval(intervalId);
-                setIsAnimatingOut(true);
-
-                // Animate out
-                const tl = gsap.timeline({
-                    onComplete: () => {
-                        // Signal that preloader is complete - this will trigger dock animation
-                        setComplete(true);
-                        setCursorDisabled(false);
-
-                        // Safe DOM removal
-                        if (preloaderRef.current) {
-                            try {
-                                if (
-                                    document.body.contains(preloaderRef.current)
-                                ) {
-                                    preloaderRef.current.style.display = "none";
-                                    setTimeout(() => {
-                                        if (
-                                            preloaderRef.current &&
-                                            document.body.contains(
-                                                preloaderRef.current
-                                            )
-                                        ) {
-                                            preloaderRef.current.remove();
-                                        }
-                                    }, 100);
-                                }
-                            } catch (error) {
-                                // eslint-disable-next-line no-console
-                                console.warn(
-                                    "Error removing preloader:",
-                                    error
-                                );
-                            }
-                        }
-                    },
-                });
-
-                if (textContainerRef.current) {
-                    tl.to(textContainerRef.current, {
-                        opacity: 0.5,
-                        scale: 0.8,
-                        duration: 0.5,
-                        ease: "power2.in",
-                    });
-                }
-
-                if (preloaderRef.current) {
-                    tl.to(preloaderRef.current, {
-                        y: "-100%",
-                        duration: 1.2,
-                        ease: "power4.inOut",
-                        delay: 0.2,
-                    });
-                }
-
+    useEffect(
+        () => {
+            // Only show preloader on first visit
+            if (isComplete || !isMounted || isAnimatingOut) {
                 return;
             }
 
-            setCurrentTextIndex(currentIndex);
-        }, intervalTime);
+            // Prefetch routes
+            const prefetchRoutes = async () => {
+                try {
+                    await Promise.all(
+                        ROUTES_TO_PREFETCH.map((route) =>
+                            router.prefetch(route)
+                        )
+                    );
+                } catch (_) {}
+            };
 
-        return () => clearInterval(intervalId);
-    }, [
-        isComplete,
-        isMounted,
-        isAnimatingOut,
-        router,
-        greetings.length,
-        width,
-        totalDuration,
-        setComplete,
-    ]);
+            prefetchRoutes();
+
+            // Animate progress bar
+            if (progressBarRef.current) {
+                gsap.to(progressBarRef.current, {
+                    width: width > 400 ? "400px" : "77vw",
+                    duration: totalDuration / 1000,
+                    ease: "circ.inOut",
+                });
+            }
+
+            // Text cycling
+            const intervalTime = totalDuration / greetings.length;
+            let currentIndex = 0;
+
+            const intervalId = setInterval(() => {
+                currentIndex++;
+
+                if (currentIndex >= greetings.length) {
+                    clearInterval(intervalId);
+                    setIsAnimatingOut(true);
+
+                    // Animate out
+                    const tl = gsap.timeline({
+                        onComplete: () => {
+                            // Signal that preloader is complete - this will trigger dock animation
+                            setComplete(true);
+                            setCursorDisabled(false);
+
+                            // Safe DOM removal
+                            if (preloaderRef.current) {
+                                try {
+                                    if (
+                                        document.body.contains(
+                                            preloaderRef.current
+                                        )
+                                    ) {
+                                        preloaderRef.current.style.display =
+                                            "none";
+                                        setTimeout(() => {
+                                            if (
+                                                preloaderRef.current &&
+                                                document.body.contains(
+                                                    preloaderRef.current
+                                                )
+                                            ) {
+                                                preloaderRef.current.remove();
+                                            }
+                                        }, 100);
+                                    }
+                                } catch (error) {
+                                    // eslint-disable-next-line no-console
+                                    console.warn(
+                                        "Error removing preloader:",
+                                        error
+                                    );
+                                }
+                            }
+                        },
+                    });
+
+                    if (textContainerRef.current) {
+                        tl.to(textContainerRef.current, {
+                            opacity: 0.5,
+                            scale: 0.8,
+                            duration: 0.5,
+                            ease: "power2.in",
+                        });
+                    }
+
+                    if (preloaderRef.current) {
+                        tl.to(preloaderRef.current, {
+                            y: "-100%",
+                            duration: 1.2,
+                            ease: "power4.inOut",
+                            delay: 0.2,
+                        });
+                    }
+
+                    return;
+                }
+
+                setCurrentTextIndex(currentIndex);
+            }, intervalTime);
+
+            return () => clearInterval(intervalId);
+        },
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        [
+            isComplete,
+            isMounted,
+            isAnimatingOut,
+            router,
+            greetings.length,
+            width,
+            totalDuration,
+            setComplete,
+        ]
+    );
 
     return (
         <div

@@ -194,8 +194,6 @@ export const useRealtimeStore = create<RealtimeStore>((set, get) => ({
             tables: remainingTables,
             subscribers: remainingSubscribers,
         });
-
-        console.log(`[${tableKey}] Cleaned up realtime connection`);
     },
 
     refetchTable: async (tableKey: string, tableName: string) => {
