@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import "./globals.css";
 import { ViewTransitions } from "next-view-transitions";
 import ReactLenis from "@studio-freight/react-lenis";
-import localFont from "next/font/local";
 
 import {
     CursorAnimation,
@@ -15,28 +14,28 @@ import Footer from "@/components/footer";
 import { useAnimationStore } from "@/stores/animation-store";
 import { BROWSER_SUPPORT } from "@/lib/constants";
 
-export const Sansation = localFont({
-    src: [
-        {
-            path: "../fonts/Sansation/Sansation-Regular.ttf",
-            weight: "400",
-            style: "normal",
-        },
-        // Add Light, LightItalic as needed
-    ],
-    display: "swap",
-});
-export const Ubuntu = localFont({
-    src: [
-        {
-            path: "../fonts/Ubuntu/Ubuntu-Regular.ttf",
-            weight: "400",
-            style: "normal",
-        },
-        // Add Light, LightItalic as needed
-    ],
-    display: "swap",
-});
+// export const Sansation = localFont({
+//     src: [
+//         {
+//             path: "../fonts/Sansation/Sansation-Regular.ttf",
+//             weight: "400",
+//             style: "normal",
+//         },
+//         // Add Light, LightItalic as needed
+//     ],
+//     display: "swap",
+// });
+// export const Ubuntu = localFont({
+//     src: [
+//         {
+//             path: "../fonts/Ubuntu/Ubuntu-Regular.ttf",
+//             weight: "400",
+//             style: "normal",
+//         },
+//         // Add Light, LightItalic as needed
+//     ],
+//     display: "swap",
+// });
 
 export default function RootLayout({
     children,
@@ -84,7 +83,7 @@ export default function RootLayout({
 
     return (
         <ViewTransitions>
-            <html lang="en" className={Ubuntu.className}>
+            <html lang="en">
                 <body>
                     <Preloader />
 

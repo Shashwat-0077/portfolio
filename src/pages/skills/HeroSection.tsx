@@ -1,6 +1,5 @@
 import Image from "next/image";
 
-import { Ubuntu } from "@/app/layout";
 import Galaxy from "@/components/galaxy";
 
 const HeroSection = () => {
@@ -9,7 +8,7 @@ const HeroSection = () => {
             {/* Text Content */}
             <div className="z-10 max-w-2xl flex-1 space-y-6">
                 <h1
-                    className={`${Ubuntu.className} text-[clamp(2.5rem,8vw,6rem)] leading-[0.9] font-bold text-white sm:text-[clamp(3rem,7vw,7rem)] sm:leading-[0.85] md:text-[clamp(3.5rem,6vw,8rem)]`}
+                    className={`text-[clamp(2.5rem,8vw,6rem)] leading-[0.9] font-bold text-white sm:text-[clamp(3rem,7vw,7rem)] sm:leading-[0.85] md:text-[clamp(3.5rem,6vw,8rem)]`}
                 >
                     LANGUAGE I <br />
                     <span className="text-primary">SPEAK</span>
@@ -51,7 +50,7 @@ const HeroSection = () => {
                     </div>
                 </div>
             </div>
-            {/* 
+            {/*
             <div className="bg-gradient-radial from-primary/10 absolute inset-0 rounded-full via-transparent to-transparent opacity-30 blur-3xl" />
             <div className="bg-primary/40 absolute top-1/4 right-1/4 h-2 w-2 animate-pulse rounded-full" />
             <div className="absolute bottom-1/3 left-1/4 h-1 w-1 animate-pulse rounded-full bg-white/30 delay-1000" />

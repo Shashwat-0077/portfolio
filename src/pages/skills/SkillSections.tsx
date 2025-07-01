@@ -64,7 +64,7 @@ type Position =
 
 type BoxData = {
     id: number;
-    ref: React.RefObject<HTMLDivElement>;
+    ref: React.RefObject<HTMLDivElement | null>;
 } & Position;
 
 const SkillSections = () => {
@@ -550,7 +550,13 @@ const SkillSections = () => {
                             }}
                         >
                             <div className="relative h-full w-full">
-                                <Icon size={40} color={defaultIconColor} />
+                                <div className="flex justify-between">
+                                    <Icon
+                                        size={40}
+                                        color={defaultIconColor}
+                                        className="z-50"
+                                    />
+                                </div>
                             </div>
                         </div>
                     );

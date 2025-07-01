@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { useTransitionRouter } from "next-view-transitions";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 import { useAnimationStore } from "@/stores/animation-store";
 import { DockAnimations, PageAnimations } from "@/lib/animations";
