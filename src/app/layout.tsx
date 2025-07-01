@@ -86,7 +86,7 @@ export default function RootLayout({
         <ViewTransitions>
             <html lang="en" className={Ubuntu.className}>
                 <body>
-                    {/* <Preloader /> */}
+                    <Preloader />
 
                     {!isCompatible ? (
                         <CursorAnimationForNonCompatibleBrowsers />
