@@ -5,17 +5,17 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 import { Observer } from "gsap/Observer";
-import { Download, Github, Linkedin, Mail } from "lucide-react";
+import { ChevronRight, Download, Github, Linkedin, Mail } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import TransitionLink from "@/components/transition-link";
 import Magnetic from "@/components/ui/magnetic";
+import { useAnimationStore } from "@/stores/animation-store";
+import { Dock, DockForNonCompatibleBrowsers } from "@/components/ui/dock";
 import NowListening from "@/components/ui/now-listening";
 import LatestCommit from "@/components/ui/latest-commit";
 import Learning from "@/components/ui/learning";
 import WakatimeStats from "@/components/ui/wakatime-stats";
-// import TransitionLink from "@/components/transition-link";
-import { useAnimationStore } from "@/stores/animation-store";
-import { Dock, DockForNonCompatibleBrowsers } from "@/components/ui/dock";
 
 gsap.registerPlugin(Observer);
 
@@ -118,6 +118,7 @@ const HeroSection = () => {
                 <div className="grid place-content-center gap-12 lg:grid-cols-2 lg:gap-20 xl:gap-32">
                     {/* Content Section */}
                     <div className="flex flex-col justify-center space-y-8 lg:space-y-10">
+                        {/* Social Icons */}
                         <div ref={socialRef} className="flex gap-6">
                             <Magnetic color="#6b7277">
                                 <Github size={28} />
@@ -130,6 +131,7 @@ const HeroSection = () => {
                             </Magnetic>
                         </div>
 
+                        {/* Main Heading */}
                         <h1
                             ref={headerRef}
                             className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl"
@@ -144,6 +146,7 @@ const HeroSection = () => {
                             </span>
                         </h1>
 
+                        {/* Description */}
                         <p
                             ref={paraRef}
                             className="max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg lg:text-xl"
@@ -200,6 +203,7 @@ const HeroSection = () => {
                             .
                         </p>
 
+                        {/* Action Buttons */}
                         <div
                             ref={buttonsRef}
                             className="flex flex-col items-start gap-4 sm:flex-row sm:items-center"
@@ -209,10 +213,10 @@ const HeroSection = () => {
                                 size="lg"
                                 className="bg-primary hover:bg-primary/90 h-auto px-6 py-3 font-medium text-white transition-all duration-200 hover:scale-105"
                             >
-                                {/* <TransitionLink href="/projects">
+                                <TransitionLink href="/projects">
                                     <span>See my work</span>
                                     <ChevronRight className="ml-2 h-4 w-4" />
-                                </TransitionLink> */}
+                                </TransitionLink>
                             </Button>
 
                             <Button
@@ -234,14 +238,15 @@ const HeroSection = () => {
                     </div>
 
                     {/* Image and Bubbles Section */}
-
                     <div className="relative flex items-center justify-center lg:justify-end">
                         <div className="relative aspect-square w-full max-w-md lg:max-w-lg xl:max-w-xl">
+                            {/* Cloud Bubbles */}
                             <NowListening />
                             <WakatimeStats />
                             <LatestCommit />
                             <Learning />
 
+                            {/* Main Image */}
                             <div className="absolute inset-0 flex items-center justify-center">
                                 <Image
                                     src="/chilling.png"
