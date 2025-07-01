@@ -1,9 +1,9 @@
 import { Metadata } from "next";
 
-import HeroSection from "@/components/pages/home/HeroSection";
-import TechSection from "@/components/pages/home/TechSection";
-import ProjectSection from "@/components/pages/home/ProjectSection";
-import EducationSection from "@/components/pages/home/EducationSection";
+import HeroSection from "@/pages/home/HeroSection";
+import TechSection from "@/pages/home/TechSection";
+import ProjectSection from "@/pages/home/ProjectSection";
+import EducationSection from "@/pages/home/EducationSection";
 
 export const metadata: Metadata = {
     title: "Shashwat Gupta",
@@ -35,8 +35,8 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
     return (
-        <main className="bg-background relative min-h-screen">
-            <div>
+        <main className="min-h-scree bg-background relative">
+            <div className="container mx-auto px-4 py-8">
                 {/* Hero Section */}
                 <HeroSection />
                 {/* Tech section */}

@@ -194,7 +194,7 @@ export const PageAnimations = {
                     transform: "translateY(0)",
                 },
                 {
-                    opacity: 0.7,
+                    opacity: 0.2,
                     transform: "translateY(-35%)",
                 },
             ],

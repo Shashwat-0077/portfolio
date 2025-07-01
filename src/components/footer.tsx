@@ -8,7 +8,7 @@ const Footer = () => {
     return (
         <div className="bg-background border-muted relative grid w-full overflow-hidden border-t md:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]">
             {/* Logo */}
-            <div className="relative hidden max-h-[800px] w-full overflow-hidden md:block">
+            <div className="relative hidden max-h-[800px] w-full overflow-hidden select-none md:block">
                 <Image
                     src={"/logo-outline.svg"}
                     className="pointer-events-none relative right-0 scale-120 select-none md:right-20 md:scale-140 lg:right-40 lg:scale-150"

@@ -94,7 +94,7 @@ const Magnetic = ({
     }, [color]);
 
     return (
-        <div ref={ref} className={cn("inline-block", className)}>
+        <div ref={ref} className={cn("inline-block cursor-pointer", className)}>
             {children}
         </div>
     );

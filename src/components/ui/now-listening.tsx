@@ -1,8 +1,9 @@
 "use client";
 import { Music } from "lucide-react";
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
 
 import { useBubbleStore } from "@/stores/bubble-store";
 import { useNowPlaying } from "@/hooks/use-supabase-realtime";
@@ -29,7 +30,7 @@ const NowListening = () => {
     const liveIndicatorRef = useRef<HTMLDivElement>(null);
 
     // Animate content when expanded
-    useEffect(() => {
+    useGSAP(() => {
         if (isExpanded && contentRef.current) {
             gsap.fromTo(
                 contentRef.current,
@@ -48,7 +49,7 @@ const NowListening = () => {
     }, [isExpanded]);
 
     // Animate header elements
-    useEffect(() => {
+    useGSAP(() => {
         if (isExpanded && headerRef.current) {
             const headerElements = headerRef.current.children;
             gsap.fromTo(
@@ -70,7 +71,7 @@ const NowListening = () => {
     }, [isExpanded]);
 
     // Animate loading state
-    useEffect(() => {
+    useGSAP(() => {
         if (loading && loadingRef.current && isExpanded) {
             const loadingElements =
                 loadingRef.current.querySelectorAll(".animate-pulse");
@@ -92,7 +93,7 @@ const NowListening = () => {
     }, [loading, isExpanded]);
 
     // Animate song data when it loads
-    useEffect(() => {
+    useGSAP(() => {
         if (data && !loading && isExpanded) {
             // Album art animation
             if (albumArtRef.current) {
@@ -173,7 +174,7 @@ const NowListening = () => {
     }, [data, loading, isExpanded]);
 
     // Animate empty state
-    useEffect(() => {
+    useGSAP(() => {
         if (!data && !loading && isExpanded && emptyStateRef.current) {
             const emptyElements = emptyStateRef.current.children;
             gsap.fromTo(

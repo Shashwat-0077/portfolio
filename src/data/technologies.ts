@@ -123,7 +123,7 @@ export const TECHNOLOGIES = {
         description: "Object-oriented, platform-independent language.",
         longDescription:
             "Java is robust for enterprise apps, Android dev, and large systems with its 'write once, run anywhere' ability.",
-        Icon: null,
+        Icon: SiJquery,
         defaultIconColor: "#007396",
     },
     PHP: {
@@ -222,7 +222,7 @@ export const TECHNOLOGIES = {
         description: "Embedded JavaScript templates.",
         longDescription:
             "EJS (Embedded JavaScript) is a templating language for generating HTML markup with JavaScript, used in Node.js.",
-        Icon: null,
+        Icon: SiJquery,
         defaultIconColor: "#F8F8F8", // Lighter
     },
     NextAuth: {
@@ -231,7 +231,7 @@ export const TECHNOLOGIES = {
         description: "Authentication for Next.js.",
         longDescription:
             "NextAuth.js is a comprehensive open-source authentication solution for Next.js applications, supporting various providers.",
-        Icon: null,
+        Icon: SiJquery,
         defaultIconColor: "#F8F8F8", // Lighter
     },
     Clerk: {
@@ -240,7 +240,7 @@ export const TECHNOLOGIES = {
         description: "Authentication & user management.",
         longDescription:
             "Clerk is a complete user management platform with pre-built UI components and APIs for secure user features.",
-        Icon: null,
+        Icon: SiJquery,
         defaultIconColor: "#F8F8F8", // Lighter
     },
     "Node.js": {
@@ -276,7 +276,7 @@ export const TECHNOLOGIES = {
         description: "API design style using HTTP.",
         longDescription:
             "REST (Representational State Transfer) is an architectural style for networked apps, leveraging HTTP for data exchange.",
-        Icon: null,
+        Icon: SiJquery,
         defaultIconColor: "#F8F8F8", // Lighter
     },
     GraphQL: {
@@ -294,7 +294,7 @@ export const TECHNOLOGIES = {
         description: "Designing consistent, scalable APIs.",
         longDescription:
             "API Design focuses on structuring software component interactions for consistency, usability, and scalability.",
-        Icon: null,
+        Icon: SiJquery,
         defaultIconColor: "#F8F8F8", // Lighter
     },
     SQL: {
@@ -312,7 +312,7 @@ export const TECHNOLOGIES = {
         description: "Python SQL ORM.",
         longDescription:
             "SQLAlchemy is a powerful SQL toolkit and ORM for Python, designed for efficient database access and management.",
-        Icon: null,
+        Icon: SiJquery,
         defaultIconColor: "#F8F8F8", // Lighter
     },
     Firebase: {
@@ -385,7 +385,7 @@ export const TECHNOLOGIES = {
         description: "Edge-hosted distributed database.",
         longDescription:
             "Turso is an edge-hosted, distributed database powered by SQLite, engineered for low-latency data access closer to users.",
-        Icon: null,
+        Icon: SiJquery,
         defaultIconColor: "#F8F8F8", // Lighter
     },
     Supabase: {
@@ -468,7 +468,7 @@ export const TECHNOLOGIES = {
         description: "GPU-accelerated terminal emulator.",
         longDescription:
             "WezTerm is a high-performance, GPU-accelerated cross-platform terminal emulator built with Rust, highly customizable.",
-        Icon: null,
+        Icon: SiJquery,
         defaultIconColor: "#F8F8F8", // Lighter
     },
     tmux: {
@@ -477,7 +477,7 @@ export const TECHNOLOGIES = {
         description: "Terminal multiplexer.",
         longDescription:
             "tmux is a robust terminal multiplexer that allows creation and management of multiple terminal sessions in one window.",
-        Icon: null,
+        Icon: SiJquery,
         defaultIconColor: "#F8F8F8", // Lighter
     },
     Neovim: {
@@ -572,5 +572,10 @@ export const TECHNOLOGIES = {
         defaultIconColor: "#5C3EE8",
     },
 };
+export const TECHNOLOGIES_ARRAY = Object.entries(TECHNOLOGIES).map(
+    ([_, value]) => ({
+        ...value,
+    })
+);
 
 export type Technology = typeof TECHNOLOGIES;
